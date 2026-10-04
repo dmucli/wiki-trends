@@ -48,15 +48,19 @@ jobs:
           [ -z "$TODO" ] && echo "skip=true" >> "$GITHUB_OUTPUT" || true
 
       - name: Generate editions
+        id: gen
         if: steps.date.outputs.skip != 'true'
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           WIKI_USER_AGENT: ${{ vars.WIKI_USER_AGENT || vars.EMAIL }}
         run: |
           if [ -z "$ANTHROPIC_API_KEY" ]; then echo "::error::ANTHROPIC_API_KEY secret is not set"; exit 1; fi
+          # Keep going past a failed day so finished days still get committed; the last step fails the run.
+          FAILED=""
           for d in ${{ steps.date.outputs.dates }}; do
-            npm run daily -- --date "$d" --limit "${{ inputs.limit || '25' }}"
+            npm run daily -- --date "$d" --limit "${{ inputs.limit || '25' }}" || FAILED="$FAILED $d"
           done
+          echo "failed=$FAILED" >> "$GITHUB_OUTPUT"
 
       - name: Build check
         if: steps.date.outputs.skip != 'true'
@@ -70,3 +74,9 @@ jobs:
           git add content
           git diff --cached --quiet || git commit -m "Edition${{ steps.date.outputs.dates }}"
           git push
+
+      - name: Report failed days
+        if: steps.gen.outputs.failed != ''
+        run: |
+          echo "::error::These days failed and were not (fully) published:${{ steps.gen.outputs.failed }}"
+          exit 1

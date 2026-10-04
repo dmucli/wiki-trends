@@ -106,6 +106,13 @@ function userPrompt(i: WriterInput): string {
 
 const client = new Anthropic({ maxRetries: 3 });
 
+/** Errors no retry will fix: missing credit, bad or revoked key. */
+export function isAccountError(e: unknown): boolean {
+  if (e instanceof Anthropic.AuthenticationError || e instanceof Anthropic.PermissionDeniedError) return true;
+  // Errors raised mid-stream are not always APIError instances, so match on the message too.
+  return e instanceof Error && /credit balance is too low|invalid x-api-key|billing/i.test(e.message);
+}
+
 export async function writeArticle(input: WriterInput): Promise<Draft> {
   const messages: Anthropic.Beta.BetaMessageParam[] = [{ role: "user", content: userPrompt(input) }];
   for (let turn = 0; turn < 6; turn++) {

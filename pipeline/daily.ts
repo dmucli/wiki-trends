@@ -8,7 +8,7 @@ import {
   currentEvents, featuredFeed, isExcluded, mobileShare, pool, recentEdits, shiftDate, spikeRatio, summary, topViews, viewSeries,
   type TopItem,
 } from "./wiki.ts";
-import { MODEL, writeArticle, type WriterInput } from "./writer.ts";
+import { isAccountError, MODEL, writeArticle, type WriterInput } from "./writer.ts";
 
 const { values: args } = parseArgs({
   options: {
@@ -93,6 +93,8 @@ async function buildArticle(lang: Lang, item: TopItem, rank: number, news: strin
           continuedFrom: prev ? `${prev.date}/${prev.slug}` : undefined,
         };
       } catch (e) {
+        // No credit or a bad key affects every article: stop rather than publish an edition of empty cards.
+        if (isAccountError(e)) throw e;
         log(`  ${rank}. ${s.title}: writer attempt ${attempt} failed: ${(e as Error).message}`);
       }
     }

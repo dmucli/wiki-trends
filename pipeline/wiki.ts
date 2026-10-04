@@ -74,7 +74,17 @@ export interface TopItem {
 export async function topViews(lang: Lang, date: string): Promise<TopItem[]> {
   const p = date.split("-");
   const url = `https://wikimedia.org/api/rest_v1/metrics/pageviews/top/${lang}.wikipedia/all-access/${p[Y]}/${p[M]}/${p[D]}`;
-  const data = await getJson(url);
+  // This endpoint occasionally 404s for a published day for a minute or two, so a 404 is retried before giving up.
+  let data: any;
+  for (let i = 0; ; i++) {
+    try {
+      data = await getJson(url);
+      break;
+    } catch (e) {
+      if (!(e instanceof NotFound) || i >= 3) throw e;
+      await sleep(20_000);
+    }
+  }
   return data.items[0].articles.map((a: any) => ({ title: a.article, views: a.views }));
 }
 
