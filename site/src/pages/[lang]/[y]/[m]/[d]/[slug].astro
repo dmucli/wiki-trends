@@ -41,7 +41,7 @@ const jsonLd = {
 };
 const [prevDate, prevSlug] = a.continuedFrom?.split("/") ?? [];
 ---
-<Base lang={lang} title={a.headline} description={a.dek} image={a.image?.url} jsonLd={jsonLd} editionDate={date}
+<Base lang={lang} title={a.headline} description={a.dek} image={a.image?.url} jsonLd={jsonLd}
   altHref={`/${lang === "en" ? "fr" : "en"}/`}>
   <article class={`story cat-${a.category}`}>
     <header class="head">

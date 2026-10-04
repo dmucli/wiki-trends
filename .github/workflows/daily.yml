@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       date:
-        description: "Pageviews day (YYYY-MM-DD), default yesterday UTC"
+        description: "Pageviews day(s), space-separated YYYY-MM-DD; default yesterday UTC"
         required: false
       limit:
         description: "Articles per edition"
@@ -33,22 +33,30 @@ jobs:
           cache: npm
       - run: npm ci
 
-      - name: Pick date
+      - name: Pick dates
         id: date
         run: |
           D="${{ inputs.date }}"
           [ -z "$D" ] && D=$(date -u -d yesterday +%F)
-          echo "date=$D" >> "$GITHUB_OUTPUT"
-          if [ -f "content/en/$D/index.json" ] && [ -f "content/fr/$D/index.json" ] && [ "${{ github.event_name }}" = "schedule" ]; then
-            echo "skip=true" >> "$GITHUB_OUTPUT"
-          fi
+          TODO=""
+          for d in $D; do
+            # Scheduled retries skip days that are already published; manual runs always regenerate.
+            if [ "${{ github.event_name }}" = "schedule" ] && [ -f "content/en/$d/index.json" ] && [ -f "content/fr/$d/index.json" ]; then continue; fi
+            TODO="$TODO $d"
+          done
+          echo "dates=$TODO" >> "$GITHUB_OUTPUT"
+          [ -z "$TODO" ] && echo "skip=true" >> "$GITHUB_OUTPUT" || true
 
       - name: Generate editions
         if: steps.date.outputs.skip != 'true'
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          WIKI_USER_AGENT: ${{ vars.WIKI_USER_AGENT }}
-        run: npm run daily -- --date "${{ steps.date.outputs.date }}" --limit "${{ inputs.limit || '25' }}"
+          WIKI_USER_AGENT: ${{ vars.WIKI_USER_AGENT || vars.EMAIL }}
+        run: |
+          if [ -z "$ANTHROPIC_API_KEY" ]; then echo "::error::ANTHROPIC_API_KEY secret is not set"; exit 1; fi
+          for d in ${{ steps.date.outputs.dates }}; do
+            npm run daily -- --date "$d" --limit "${{ inputs.limit || '25' }}"
+          done
 
       - name: Build check
         if: steps.date.outputs.skip != 'true'
@@ -60,5 +68,5 @@ jobs:
           git config user.name "wiki-trends-bot"
           git config user.email "wiki-trends-bot@users.noreply.github.com"
           git add content
-          git diff --cached --quiet || git commit -m "Edition ${{ steps.date.outputs.date }}"
+          git diff --cached --quiet || git commit -m "Edition${{ steps.date.outputs.dates }}"
           git push

@@ -10,15 +10,15 @@ interface Props {
   image?: string | null;
   altHref?: string; // same page in the other language, when it exists
   jsonLd?: object;
-  editionDate?: string;
 }
-const { lang, title, description, image, altHref, jsonLd, editionDate } = Astro.props;
+const { lang, title, description, image, altHref, jsonLd } = Astro.props;
 const s = t(lang);
 const other: Lang = lang === "en" ? "fr" : "en";
 const pageTitle = title ? `${title} · ${s.siteName}` : s.siteName;
 const canonical = new URL(Astro.url.pathname, Astro.site);
-const dateLine = new Date((editionDate ?? new Date().toISOString().slice(0, 10)) + "T12:00:00Z").toLocaleDateString(s.dateLocale, {
-  weekday: "long", day: "numeric", month: "long", year: "numeric", timeZone: "UTC",
+// The masthead shows today's date (the site is rebuilt daily); editions are dated by the pageviews day they cover.
+const dateLine = new Date().toLocaleDateString(s.dateLocale, {
+  weekday: "long", day: "numeric", month: "long", year: "numeric", timeZone: lang === "fr" ? "Europe/Paris" : "UTC",
 });
 ---
 <!doctype html>

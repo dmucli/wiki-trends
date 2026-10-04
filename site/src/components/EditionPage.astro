@@ -17,7 +17,7 @@ const newer = dates[i - 1];
 const other: Lang = lang === "en" ? "fr" : "en";
 const altHref = editionDates(other).includes(date) ? (isFront ? `/${other}/` : editionHref(other, date)) : `/${other}/`;
 ---
-<Base lang={lang} editionDate={date} altHref={altHref}
+<Base lang={lang} altHref={altHref}
   title={isFront ? undefined : `${s.edition} ${formatDate(lang, date)}`}
   description={lead ? lead.headline : undefined} image={lead?.image?.url}>
   <p class="edition-line meta">
