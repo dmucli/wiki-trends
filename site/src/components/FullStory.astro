@@ -1,0 +1,75 @@
+---
+// A complete story on the front page: everything the article page has, so readers never need to click through.
+import type { Article } from "../../../types/article.ts";
+import { articleHref, formatDate, formatViews, t, type Lang } from "../lib/content.ts";
+import Picture from "./Picture.astro";
+import Sparkline from "./Sparkline.astro";
+
+interface Props { a: Article; lang: Lang; lead?: boolean }
+const { a, lang, lead = false } = Astro.props;
+const s = t(lang);
+const paragraphs = a.body.length ? a.body : [a.whyNow];
+const H = lead ? "h2" : "h3";
+---
+<article class={`full cat-${a.category} ${lead ? "lead" : ""}`} id={a.slug}>
+  <div class="pic">
+    <Picture image={a.image} alt={a.title} label={a.title} category={a.category} lang={lang}
+      series={a.series} views={a.views} credit eager={lead} ratio={lead ? "16 / 9" : "4 / 3"} />
+  </div>
+
+  <div class="text">
+    <p class="top-line">
+      <span class="rank">{a.rank}</span>
+      <a class="kicker" href={`/${lang}/category/${a.category}/`}>{s.categories[a.category]}</a>
+    </p>
+    <H><a href={articleHref(a)} class="headline-link">{a.headline}</a></H>
+    {a.dek && !paragraphs[0].startsWith(a.dek) && <p class="dek">{a.dek}</p>}
+
+    <p class="what"><b>{s.whatItIs}.</b> {a.whatItIs}</p>
+    <div class:list={["body", { multi: paragraphs.length >= 3 }]}>
+      {paragraphs.map((p) => <p>{p}</p>)}
+    </div>
+
+    <div class="facts">
+      <div class="stat">
+        <Sparkline series={a.series} width={140} height={34} label={s.last30} />
+        <span class="meta"><strong>{formatViews(lang, a.views)}</strong> {s.views} · {formatDate(lang, a.date, { day: "numeric", month: "short" })}</span>
+      </div>
+      <span class={`confidence ${a.confidence}`}>{s.confidence[a.confidence]}</span>
+    </div>
+
+    <p class="sources meta">
+      {a.sources.length > 0 && <>{s.sources}{lang === "fr" ? " :" : ":"} {a.sources.map((src, i) => <>{i > 0 && " · "}<a href={src.url} rel="noopener nofollow">{src.publisher || src.title}</a></>)} · </>}
+      <a href={a.wikipediaUrl}>Wikipedia</a>
+    </p>
+  </div>
+</article>
+
+<style>
+  .full { display: grid; gap: 1rem 1.75rem; padding: 2rem 0; border-top: 1px solid var(--line); scroll-margin-top: 1rem; }
+  .full > * { min-width: 0; }
+  @media (min-width: 760px) {
+    .full:not(.lead) { grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); }
+  }
+  .lead { border-top: 0; padding-top: 0; }
+  .text { display: grid; gap: .55rem; align-content: start; }
+  .top-line { display: flex; align-items: baseline; gap: .6rem; margin: 0; }
+  .rank { font-family: var(--display); font-weight: 800; font-size: 1.5rem; line-height: 1; color: var(--c); letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+  h2 { font-size: clamp(2rem, 4.6vw, 3rem); line-height: 1.02; font-weight: 750; letter-spacing: -.035em; }
+  h3 { font-size: clamp(1.35rem, 2.6vw, 1.7rem); line-height: 1.1; font-weight: 700; letter-spacing: -.02em; }
+  .dek { font-size: 1.15rem; color: var(--soft); margin: 0; }
+  .lead .dek { font-size: 1.35rem; }
+  .what { margin: .2rem 0 0; color: var(--soft); }
+  .what b { font-family: var(--display); font-size: .8rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--c); }
+  .body p { margin: 0 0 .8rem; }
+  .lead .body { font-size: 1.12rem; }
+  @media (min-width: 900px) { .lead .body.multi { columns: 2; column-gap: 2rem; } .lead .body p { break-inside: avoid; } }
+  .facts { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1.25rem; }
+  .stat { display: flex; align-items: center; gap: .7rem; }
+  .stat strong { color: var(--ink); }
+  .confidence { font-family: var(--display); font-size: .82rem; font-weight: 650; display: inline-flex; align-items: center; gap: .4rem; }
+  .confidence::before { content: ""; width: .55rem; height: .55rem; border-radius: 50%; background: currentColor; }
+  .confirmed { color: var(--sport); } .likely { color: var(--viral); } .hypothesis { color: var(--soft); }
+  .sources { margin: 0; overflow-wrap: anywhere; }
+  .sources a { color: inherit; }
+</style>

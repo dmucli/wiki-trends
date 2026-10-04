@@ -11,7 +11,7 @@ export function GET(context: APIContext) {
   const s = t(lang);
   return rss({
     title: `${s.siteName} (${lang.toUpperCase()})`,
-    description: s.tagline,
+    description: s.description,
     site: context.site!,
     customData: `<language>${lang}</language>`,
     items: allArticles(lang)

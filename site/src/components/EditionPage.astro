@@ -1,6 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
-import StoryCard from "./StoryCard.astro";
+import FullStory from "./FullStory.astro";
 import MostRead from "./MostRead.astro";
 import { article, edition, editionDates, editionHref, formatDate, t, type Lang } from "../lib/content.ts";
 
@@ -8,10 +8,8 @@ interface Props { lang: Lang; date: string; isFront?: boolean }
 const { lang, date, isFront = false } = Astro.props;
 const s = t(lang);
 const ed = edition(lang, date);
-const [lead, ...rest] = ed.entries;
-const secondary = rest.slice(0, 2);
-const grid = rest.slice(2, 11);
-const more = rest.slice(11);
+// Every story is printed in full on the front page; article pages exist for sharing and search.
+const [lead, ...rest] = ed.entries.map((e) => article(lang, date, e.slug));
 const dates = editionDates(lang);
 const i = dates.indexOf(date);
 const older = dates[i + 1];
@@ -28,46 +26,25 @@ const altHref = editionDates(other).includes(date) ? (isFront ? `/${other}/` : e
     {newer && <> · <a href={editionHref(lang, newer)}>{formatDate(lang, newer, { day: "numeric", month: "short" })} →</a></>}
   </p>
 
-  {lead && (
-    <section class="top">
-      <div class="lead"><StoryCard entry={lead} date={date} lang={lang} variant="lead" whyNow={article(lang, date, lead.slug).whyNow} /></div>
-      <div class="secondary">
-        {secondary.map((e) => <StoryCard entry={e} date={date} lang={lang} />)}
-      </div>
-    </section>
-  )}
-
   <div class="columns">
     <div class="main">
-      <div class="grid">
-        {grid.map((e) => <StoryCard entry={e} date={date} lang={lang} />)}
-      </div>
-      {more.length > 0 && (
-        <section class="more">
-          <h2 class="section-title">{s.relatedToday}</h2>
-          <div class="more-grid">
-            {more.map((e) => <StoryCard entry={e} date={date} lang={lang} variant="compact" />)}
-          </div>
-        </section>
-      )}
+      {lead && <FullStory a={lead} lang={lang} lead />}
+      {rest.map((a) => <FullStory a={a} lang={lang} />)}
     </div>
-    <aside class="aside"><MostRead entries={ed.entries} date={date} lang={lang} /></aside>
+    <aside class="aside"><div class="sticky"><MostRead entries={ed.entries} date={date} lang={lang} anchors /></div></aside>
   </div>
 </Base>
 
 <style>
   .edition-line { margin: 0 0 1.25rem; }
   .edition-line a { color: inherit; }
-  .top { display: grid; gap: 1.75rem; padding-bottom: 2rem; border-bottom: 1px solid var(--line); margin-bottom: 2rem; }
-  .secondary { display: grid; gap: 1.75rem; }
-  @media (min-width: 900px) {
-    .top { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); }
-    .secondary { border-left: 1px solid var(--line); padding-left: 1.75rem; }
-  }
   .columns { display: grid; gap: 2.5rem; }
-  .top > *, .columns > *, .secondary > * { min-width: 0; }
-  @media (min-width: 1000px) { .columns { grid-template-columns: minmax(0, 1fr) 20rem; } .aside { border-left: 1px solid var(--line); padding-left: 1.75rem; } }
-  .grid { display: grid; gap: 2rem 1.5rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr)); }
-  .more { margin-top: 3rem; }
-  .more-grid { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 11rem), 1fr)); }
+  .columns > * { min-width: 0; }
+  /* On phones the index would push every story down a full screen, so it only appears beside the stories. */
+  .aside { display: none; }
+  @media (min-width: 1000px) {
+    .columns { grid-template-columns: minmax(0, 1fr) 18rem; }
+    .aside { display: block; border-left: 1px solid var(--line); padding-left: 1.75rem; }
+    .sticky { position: sticky; top: 1rem; max-height: calc(100vh - 2rem); overflow-y: auto; scrollbar-width: thin; }
+  }
 </style>

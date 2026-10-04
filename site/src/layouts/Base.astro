@@ -15,7 +15,7 @@ interface Props {
 const { lang, title, description, image, altHref, jsonLd, editionDate } = Astro.props;
 const s = t(lang);
 const other: Lang = lang === "en" ? "fr" : "en";
-const pageTitle = title ? `${title} · ${s.siteName}` : `${s.siteName}: ${s.tagline}`;
+const pageTitle = title ? `${title} · ${s.siteName}` : s.siteName;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const dateLine = new Date((editionDate ?? new Date().toISOString().slice(0, 10)) + "T12:00:00Z").toLocaleDateString(s.dateLocale, {
   weekday: "long", day: "numeric", month: "long", year: "numeric", timeZone: "UTC",
@@ -27,12 +27,12 @@ const dateLine = new Date((editionDate ?? new Date().toISOString().slice(0, 10))
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{pageTitle}</title>
-  <meta name="description" content={description ?? s.tagline} />
+  <meta name="description" content={description ?? s.description} />
   <link rel="canonical" href={canonical} />
   <link rel="alternate" type="application/rss+xml" title={`${s.siteName} (${lang.toUpperCase()})`} href={`/${lang}/rss.xml`} />
   <meta property="og:site_name" content={s.siteName} />
   <meta property="og:title" content={title ?? s.siteName} />
-  <meta property="og:description" content={description ?? s.tagline} />
+  <meta property="og:description" content={description ?? s.description} />
   <meta property="og:url" content={canonical} />
   <meta property="og:locale" content={lang === "fr" ? "fr_FR" : "en_GB"} />
   {image && <meta property="og:image" content={image} />}
@@ -51,7 +51,6 @@ const dateLine = new Date((editionDate ?? new Date().toISOString().slice(0, 10))
     </div>
     <div class="wrap brand">
       <a href={`/${lang}/`} class="logo">Wiki<span>Trends</span></a>
-      <p class="tagline">{s.tagline}</p>
     </div>
     <nav class="wrap sections" aria-label="Sections">
       <ul>
@@ -90,7 +89,6 @@ const dateLine = new Date((editionDate ?? new Date().toISOString().slice(0, 10))
   .logo { font-family: var(--display); font-weight: 800; font-size: clamp(2.4rem, 9vw, 4.4rem); letter-spacing: -.045em; line-height: 1; text-decoration: none; }
   .logo span { font-weight: 400; font-style: normal; }
   .logo.small { font-size: 1.6rem; }
-  .tagline { margin: .35rem 0 0; color: var(--soft); font-style: italic; }
   .sections ul { list-style: none; margin: 0; padding: .55rem 0; display: flex; gap: .3rem 1.25rem; overflow-x: auto; scrollbar-width: none; justify-content: safe center; }
   .sections a { font-family: var(--display); font-size: .88rem; font-weight: 600; text-decoration: none; white-space: nowrap; }
   .sections a:hover { color: var(--c, var(--ink)); text-decoration: underline; }

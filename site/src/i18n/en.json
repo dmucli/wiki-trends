@@ -1,6 +1,6 @@
 {
   "siteName": "Wiki Trends",
-  "tagline": "What the world is reading on Wikipedia, and why.",
+  "description": "The most-read Wikipedia articles, explained every day.",
   "edition": "Edition of",
   "mostRead": "Most read",
   "views": "views",
@@ -24,10 +24,19 @@
   "moreIn": "More in",
   "seeAll": "See all",
   "otherLang": "Français",
-  "confidence": { "confirmed": "Confirmed", "likely": "Likely", "hypothesis": "Best guess" },
+  "confidence": {
+    "confirmed": "Confirmed",
+    "likely": "Likely",
+    "hypothesis": "Best guess"
+  },
   "categories": {
-    "news": "News", "sport": "Sport", "screen": "Film & TV", "death": "Deaths",
-    "viral": "Viral", "evergreen": "Always popular", "mystery": "Unexplained"
+    "news": "News",
+    "sport": "Sport",
+    "screen": "Film & TV",
+    "death": "Deaths",
+    "viral": "Viral",
+    "evergreen": "Always popular",
+    "mystery": "Unexplained"
   },
   "dateLocale": "en-GB"
 }

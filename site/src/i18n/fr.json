@@ -1,6 +1,6 @@
 {
   "siteName": "Wiki Trends",
-  "tagline": "Ce que le monde lit sur Wikipédia, et pourquoi.",
+  "description": "Les articles les plus consultés de Wikipédia, expliqués chaque jour.",
   "edition": "Édition du",
   "mostRead": "Les plus lus",
   "views": "vues",
@@ -24,10 +24,19 @@
   "moreIn": "Plus de",
   "seeAll": "Tout voir",
   "otherLang": "English",
-  "confidence": { "confirmed": "Confirmé", "likely": "Probable", "hypothesis": "Hypothèse" },
+  "confidence": {
+    "confirmed": "Confirmé",
+    "likely": "Probable",
+    "hypothesis": "Hypothèse"
+  },
   "categories": {
-    "news": "Actualité", "sport": "Sport", "screen": "Télé et cinéma", "death": "Décès",
-    "viral": "Viral", "evergreen": "Toujours populaires", "mystery": "Inexpliqué"
+    "news": "Actualité",
+    "sport": "Sport",
+    "screen": "Télé et cinéma",
+    "death": "Décès",
+    "viral": "Viral",
+    "evergreen": "Toujours populaires",
+    "mystery": "Inexpliqué"
   },
   "dateLocale": "fr-FR"
 }

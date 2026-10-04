@@ -2,8 +2,8 @@
 import type { EditionEntry } from "../../../types/article.ts";
 import { articleHref, formatViews, t, type Lang } from "../lib/content.ts";
 import Sparkline from "./Sparkline.astro";
-interface Props { entries: EditionEntry[]; date: string; lang: Lang }
-const { entries, date, lang } = Astro.props;
+interface Props { entries: EditionEntry[]; date: string; lang: Lang; anchors?: boolean }
+const { entries, date, lang, anchors = false } = Astro.props;
 const s = t(lang);
 ---
 <section class="most-read" aria-labelledby="most-read-title">
@@ -13,7 +13,7 @@ const s = t(lang);
       <li class={`cat-${e.category}`}>
         <span class="n">{e.rank}</span>
         <div>
-          <a href={articleHref({ date, slug: e.slug }, lang)}>{e.title}</a>
+          <a href={anchors ? `#${e.slug}` : articleHref({ date, slug: e.slug }, lang)}>{e.title}</a>
           <span class="meta">{formatViews(lang, e.views)} {s.views}</span>
         </div>
         <Sparkline series={e.series} width={64} height={22} label={s.last30} />
