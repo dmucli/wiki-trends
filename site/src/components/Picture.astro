@@ -1,0 +1,57 @@
+---
+import type { ImageCredit, Category } from "../../../types/article.ts";
+import { formatViews, t, type Lang } from "../lib/content.ts";
+interface Props {
+  image: ImageCredit | null; alt: string; category: Category; lang: Lang;
+  credit?: boolean; ratio?: string; eager?: boolean; label?: string;
+  series?: number[]; views?: number;
+}
+const { image, alt, category, lang, credit = false, ratio = "3 / 2", eager = false, label, series, views } = Astro.props;
+const s = t(lang);
+// Portraits are cropped from the top so faces stay in frame.
+const portrait = image && image.height > image.width;
+
+// No free photo: the traffic curve is the picture, which is the story anyway.
+const W = 300, H = 100;
+let line = "", area = "";
+if (!image && series && series.length > 1) {
+  const max = Math.max(...series, 1);
+  const pts = series.map((v, i) => [(i / (series.length - 1)) * W, H - 4 - (v / max) * (H - 12)]);
+  line = pts.map(([x, y], i) => `${i ? "L" : "M"}${x.toFixed(1)},${y.toFixed(1)}`).join(" ");
+  area = `${line} L${W},${H} L0,${H} Z`;
+}
+---
+<figure class={`pic cat-${category}`}>
+  {image ? (
+    <img src={image.url} alt={alt} width={image.width} height={image.height} loading={eager ? "eager" : "lazy"} decoding="async"
+      style={`aspect-ratio:${ratio};object-position:${portrait ? "50% 20%" : "50% 50%"}`} />
+  ) : (
+    <div class="card" style={`aspect-ratio:${ratio}`} aria-hidden="true">
+      <span class="label">{label ?? alt}</span>
+      {views !== undefined && <span class="views">{formatViews(lang, views)} {s.views}</span>}
+      {line && (
+        <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none">
+          <path d={area} fill="#fff" opacity=".16" />
+          <path d={line} fill="none" stroke="#fff" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round" />
+        </svg>
+      )}
+    </div>
+  )}
+  {credit && image && (
+    <figcaption class="meta">
+      {s.photo}: {image.artist} · {image.licenseUrl ? <a href={image.licenseUrl} rel="license noopener">{image.license}</a> : image.license} · <a href={image.pageUrl}>Wikimedia</a>
+    </figcaption>
+  )}
+</figure>
+<style>
+  figure { margin: 0; min-width: 0; }
+  img { width: 100%; object-fit: cover; background: var(--line); }
+  .card { position: relative; width: 100%; display: flex; flex-direction: column; justify-content: flex-start; gap: .3rem; padding: clamp(.75rem, 2.5vw, 1.5rem);
+    background: linear-gradient(160deg, color-mix(in srgb, var(--c) 50%, #0b0f14) 0%, color-mix(in srgb, var(--c) 68%, #0b0f14) 100%); color: #fff; overflow: hidden; container-type: inline-size; }
+  .label { position: relative; z-index: 1; font-family: var(--display); font-weight: 800; font-size: clamp(1.1rem, 9cqi, 3.2rem); line-height: .95; letter-spacing: -.035em; text-wrap: balance;
+    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .views { position: relative; z-index: 1; font-family: var(--display); font-size: clamp(.7rem, 3.5cqi, .95rem); font-weight: 600; opacity: .85; }
+  svg { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 55%; }
+  figcaption { margin-top: .4rem; font-size: .74rem; }
+  figcaption a { color: inherit; }
+</style>

@@ -1,0 +1,44 @@
+---
+import Base from "../../../layouts/Base.astro";
+import { LANGS, t, type Lang } from "../../../lib/content.ts";
+
+export function getStaticPaths() {
+  return LANGS.map((lang) => ({ params: { lang } }));
+}
+const lang = Astro.params.lang as Lang;
+const s = t(lang);
+---
+<Base lang={lang} title={s.about} altHref={`/${lang === "en" ? "fr" : "en"}/about/`}>
+  <div class="prose">
+    {lang === "fr" ? (
+      <>
+        <h1>À propos</h1>
+        <p>Chaque jour, Wiki Trends regarde quels articles de Wikipédia en français ont été les plus consultés la veille, et cherche pourquoi.</p>
+        <h2>Méthode</h2>
+        <p>Les chiffres viennent des statistiques publiques de Wikimedia. Nous écartons les pages techniques et le trafic qui a l'air automatique (une audience presque entièrement sur ordinateur ou sur mobile). Pour chaque article, une IA (Claude, d'Anthropic) lit le résumé Wikipédia, les modifications récentes et l'actualité, puis cherche dans la presse la cause du pic et rédige l'explication en citant ses sources.</p>
+        <p>Chaque article indique un niveau de confiance : <strong>Confirmé</strong> quand une source relie l'événement à la date, <strong>Probable</strong> quand le calendrier colle sans preuve directe, <strong>Hypothèse</strong> sinon.</p>
+        <h2>Images</h2>
+        <p>Les photos proviennent de Wikimedia Commons, sous licence libre ; l'auteur et la licence figurent sous chaque image. Sans image libre, nous affichons une carte typographique.</p>
+        <h2>Erreurs</h2>
+        <p>Les textes sont générés automatiquement et peuvent contenir des erreurs. Signalez-les-nous et nous corrigerons.</p>
+      </>
+    ) : (
+      <>
+        <h1>About</h1>
+        <p>Every day, Wiki Trends looks at which English Wikipedia articles were read most the day before, and works out why.</p>
+        <h2>Method</h2>
+        <p>Numbers come from Wikimedia's public pageview statistics. We drop technical pages and traffic that looks automated (an audience almost entirely on desktop or on mobile). For each article an AI (Claude, by Anthropic) reads the Wikipedia summary, recent edits and the news, searches the press for what caused the spike, and writes the explanation with its sources.</p>
+        <p>Every story carries a confidence label: <strong>Confirmed</strong> when a source ties the event to the date, <strong>Likely</strong> when the timing fits without direct proof, <strong>Best guess</strong> otherwise.</p>
+        <h2>Images</h2>
+        <p>Photos come from Wikimedia Commons under free licences; the author and licence are shown under each image. When there is no free image we show a typographic card.</p>
+        <h2>Corrections</h2>
+        <p>Stories are generated automatically and can contain mistakes. Tell us and we will fix them.</p>
+      </>
+    )}
+  </div>
+</Base>
+<style>
+  .prose { max-width: 40rem; font-size: 1.12rem; }
+  h1 { font-size: clamp(2rem, 5vw, 3rem); letter-spacing: -.03em; margin-bottom: 1rem; }
+  h2 { font-size: 1.25rem; margin: 2rem 0 .5rem; }
+</style>

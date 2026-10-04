@@ -1,0 +1,26 @@
+---
+import Base from "../../../layouts/Base.astro";
+import StoryCard from "../../../components/StoryCard.astro";
+import { CATEGORIES, toEntry, type Category } from "../../../../../types/article.ts";
+import { allArticles, LANGS, t, type Lang } from "../../../lib/content.ts";
+
+export function getStaticPaths() {
+  return LANGS.flatMap((lang) => CATEGORIES.map((cat) => ({ params: { lang, cat } })));
+}
+const lang = Astro.params.lang as Lang;
+const cat = Astro.params.cat as Category;
+const s = t(lang);
+const items = allArticles(lang).filter((a) => a.category === cat).slice(0, 60);
+---
+<Base lang={lang} title={s.categories[cat]} altHref={`/${lang === "en" ? "fr" : "en"}/category/${cat}/`}>
+  <h1 class={`page-title cat-${cat}`}>{s.categories[cat]}</h1>
+  {items.length === 0 ? <p class="meta">—</p> : (
+    <div class="grid">
+      {items.map((a) => <StoryCard entry={toEntry(a)} date={a.date} lang={lang} />)}
+    </div>
+  )}
+</Base>
+<style>
+  .page-title { font-size: clamp(2rem, 5vw, 3rem); margin: 0 0 1.5rem; letter-spacing: -.03em; color: var(--c); border-top: 4px solid var(--c); padding-top: .6rem; }
+  .grid { display: grid; gap: 2rem 1.5rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr)); }
+</style>

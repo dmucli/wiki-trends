@@ -1,0 +1,64 @@
+name: Daily edition
+
+on:
+  schedule:
+    - cron: "30 2 * * *" # pageviews for the previous day are usually out by now
+    - cron: "0 5 * * *"  # retry; skipped if today's edition already exists
+  workflow_dispatch:
+    inputs:
+      date:
+        description: "Pageviews day (YYYY-MM-DD), default yesterday UTC"
+        required: false
+      limit:
+        description: "Articles per edition"
+        required: false
+        default: "25"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-edition
+  cancel-in-progress: false
+
+jobs:
+  edition:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+
+      - name: Pick date
+        id: date
+        run: |
+          D="${{ inputs.date }}"
+          [ -z "$D" ] && D=$(date -u -d yesterday +%F)
+          echo "date=$D" >> "$GITHUB_OUTPUT"
+          if [ -f "content/en/$D/index.json" ] && [ -f "content/fr/$D/index.json" ] && [ "${{ github.event_name }}" = "schedule" ]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Generate editions
+        if: steps.date.outputs.skip != 'true'
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          WIKI_USER_AGENT: ${{ vars.WIKI_USER_AGENT }}
+        run: npm run daily -- --date "${{ steps.date.outputs.date }}" --limit "${{ inputs.limit || '25' }}"
+
+      - name: Build check
+        if: steps.date.outputs.skip != 'true'
+        run: npm run build
+
+      - name: Commit
+        if: steps.date.outputs.skip != 'true'
+        run: |
+          git config user.name "wiki-trends-bot"
+          git config user.email "wiki-trends-bot@users.noreply.github.com"
+          git add content
+          git diff --cached --quiet || git commit -m "Edition ${{ steps.date.outputs.date }}"
+          git push

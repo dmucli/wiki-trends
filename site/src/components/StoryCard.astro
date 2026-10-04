@@ -1,0 +1,40 @@
+---
+import type { EditionEntry } from "../../../types/article.ts";
+import { articleHref, formatViews, t, type Lang } from "../lib/content.ts";
+import Picture from "./Picture.astro";
+interface Props { entry: EditionEntry; date: string; lang: Lang; variant?: "lead" | "standard" | "compact"; showImage?: boolean; whyNow?: string }
+const { entry: e, date, lang, variant = "standard", showImage = true, whyNow } = Astro.props;
+const s = t(lang);
+const href = articleHref({ date, slug: e.slug }, lang);
+const H = variant === "lead" ? "h2" : "h3";
+---
+<article class={`story ${variant} cat-${e.category}`}>
+  {showImage && (
+    <a href={href} class="img-link" tabindex="-1" aria-hidden="true">
+      <Picture image={e.image} alt={e.title} label={e.title} category={e.category} lang={lang} series={e.series} views={e.views} eager={variant === "lead"} ratio={variant === "lead" ? "16 / 10" : "3 / 2"} />
+    </a>
+  )}
+  <div class="text">
+    <a class="kicker" href={`/${lang}/category/${e.category}/`}>{s.categories[e.category]}</a>
+    <a href={href} class="headline-link"><H>{e.headline}</H></a>
+    {variant !== "compact" && e.dek && <p class="dek">{e.dek}</p>}
+    {variant === "lead" && whyNow && whyNow !== e.dek && <p class="why">{whyNow}</p>}
+    <p class="meta">{s.rank} {e.rank} · {formatViews(lang, e.views)} {s.views}</p>
+  </div>
+</article>
+<style>
+  .story { display: grid; gap: .7rem; align-content: start; min-width: 0; }
+  .story > * { min-width: 0; }
+  .text { display: grid; gap: .3rem; align-content: start; }
+  h2 { font-size: clamp(1.8rem, 4.2vw, 2.8rem); line-height: 1.02; font-weight: 750; letter-spacing: -.03em; }
+  h3 { font-size: 1.28rem; line-height: 1.12; font-weight: 650; }
+  .compact h3 { font-size: 1.05rem; }
+  .lead .dek { font-size: 1.2rem; }
+  .why { margin: .2rem 0 0; }
+  .meta { margin: .2rem 0 0; }
+  .img-link { display: block; text-decoration: none; }
+  @media (max-width: 640px) {
+    .compact { grid-template-columns: 7.5rem minmax(0, 1fr); gap: .9rem; align-items: start; }
+    .compact :global(.label) { font-size: 1rem; }
+  }
+</style>

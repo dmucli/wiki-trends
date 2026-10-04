@@ -1,0 +1,10 @@
+---
+import EditionPage from "../../components/EditionPage.astro";
+import { editionDates, LANGS, type Lang } from "../../lib/content.ts";
+
+export function getStaticPaths() {
+  return LANGS.filter((lang) => editionDates(lang).length).map((lang) => ({ params: { lang } }));
+}
+const lang = Astro.params.lang as Lang;
+---
+<EditionPage lang={lang} date={editionDates(lang)[0]} isFront />

@@ -1,0 +1,72 @@
+{
+  "lang": "fr",
+  "date": "2026-09-30",
+  "rank": 8,
+  "slug": "alain-soral",
+  "title": "Alain Soral",
+  "wikipediaUrl": "https://fr.wikipedia.org/wiki/Alain_Soral",
+  "views": 23766,
+  "series": [
+    1216,
+    1131,
+    793,
+    775,
+    736,
+    879,
+    819,
+    913,
+    800,
+    926,
+    993,
+    809,
+    1054,
+    935,
+    957,
+    803,
+    978,
+    771,
+    731,
+    756,
+    737,
+    862,
+    781,
+    675,
+    628,
+    585,
+    665,
+    4710,
+    20920,
+    23766
+  ],
+  "spike": 29.4,
+  "headline": "Alain Soral",
+  "dek": "Son nom revient partout dans la couverture de l'affaire Bardella-Mediapart (voir les numéros 13 et 14).",
+  "whatItIs": "Idéologue d'extrême droite franco-suisse, essayiste et figure du web, connu pour ses positions antisémites et complotistes.",
+  "whyNow": "Son nom revient partout dans la couverture de l'affaire Bardella-Mediapart (voir les numéros 13 et 14). Plusieurs médias ont republié son parcours mercredi. Condamné en février à deux ans de prison, visé par un mandat d'arrêt, il vit désormais à Moscou.",
+  "body": [],
+  "category": "news",
+  "confidence": "likely",
+  "sources": [
+    {
+      "title": "lessentieldeleco.fr",
+      "url": "https://lessentieldeleco.fr/8708-alain-soral-lantisemitisme-a-lere-des-reseaux-sociaux/"
+    },
+    {
+      "title": "franceinfo.fr",
+      "url": "https://www.franceinfo.fr/politique/jordan-bardella/la-suite-de-nos-revelation-arrive-promet-fabrice-arfi-de-mediapart-apres-les-accusations-d-antisemitisme-contre-jordan-bardella_8215730.html"
+    }
+  ],
+  "sensitive": false,
+  "image": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/c/cd/Soral_Lyon.jpg?utm_source=fr.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+    "width": 1200,
+    "height": 1190,
+    "file": "Fichier:Soral Lyon.jpg",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Soral_Lyon.jpg",
+    "artist": "Torpegiggio",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+  },
+  "generatedBy": "seed",
+  "updatedAt": "2026-10-04T15:29:30.128Z"
+}

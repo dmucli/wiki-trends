@@ -1,0 +1,33 @@
+{
+  "siteName": "Wiki Trends",
+  "tagline": "Ce que le monde lit sur Wikipédia, et pourquoi.",
+  "edition": "Édition du",
+  "mostRead": "Les plus lus",
+  "views": "vues",
+  "viewsShort": "vues",
+  "spike": "× le trafic habituel",
+  "readOnWikipedia": "Lire l'article sur Wikipédia",
+  "whatItIs": "De quoi s'agit-il",
+  "whyNow": "Pourquoi maintenant",
+  "sources": "Sources",
+  "noSources": "Aucune source de presse ne confirme encore la cause.",
+  "photo": "Photo",
+  "byline": "Wiki Trends, d'après les consultations de Wikipédia",
+  "aiNote": "Rédigé avec l'IA à partir des données de Wikipédia et des sources citées. Une erreur ? Signalez-la.",
+  "relatedToday": "Aussi en tendance ce jour-là",
+  "archive": "Archives",
+  "about": "À propos",
+  "allEditions": "Toutes les éditions",
+  "rank": "N°",
+  "stillTrending": "Toujours en tendance : premier article le",
+  "last30": "30 derniers jours",
+  "moreIn": "Plus de",
+  "seeAll": "Tout voir",
+  "otherLang": "English",
+  "confidence": { "confirmed": "Confirmé", "likely": "Probable", "hypothesis": "Hypothèse" },
+  "categories": {
+    "news": "Actualité", "sport": "Sport", "screen": "Télé et cinéma", "death": "Décès",
+    "viral": "Viral", "evergreen": "Toujours populaires", "mystery": "Inexpliqué"
+  },
+  "dateLocale": "fr-FR"
+}

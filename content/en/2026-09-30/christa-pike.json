@@ -1,0 +1,63 @@
+{
+  "lang": "en",
+  "date": "2026-09-30",
+  "rank": 1,
+  "slug": "christa-pike",
+  "title": "Christa Pike",
+  "wikipediaUrl": "https://en.wikipedia.org/wiki/Christa_Pike",
+  "views": 1334670,
+  "series": [
+    11005,
+    13189,
+    11953,
+    24599,
+    28529,
+    23634,
+    14584,
+    11576,
+    14506,
+    29498,
+    18596,
+    23738,
+    39127,
+    20442,
+    23749,
+    30409,
+    33093,
+    30496,
+    28379,
+    26744,
+    27255,
+    55927,
+    77584,
+    70756,
+    85070,
+    131276,
+    145932,
+    190062,
+    507058,
+    1334670
+  ],
+  "spike": 47,
+  "headline": "Christa Pike",
+  "dek": "Tennessee tried to execute her on Wednesday night and failed.",
+  "whatItIs": "An American woman on death row in Tennessee for a murder she committed in 1995, when she was 18.",
+  "whyNow": "Tennessee tried to execute her on Wednesday night and failed. She survived two doses of the lethal injection drug and was taken to hospital, and Governor Bill Lee has halted the state's one remaining execution this year. She would have been the first woman executed in Tennessee in more than 200 years, which is why her page had been climbing all week before it exploded.",
+  "body": [],
+  "category": "news",
+  "confidence": "confirmed",
+  "sources": [
+    {
+      "title": "abcnews.com",
+      "url": "https://abcnews.com/US/wireStory/tennessee-prepares-execute-woman-crime-committed-age-18-136878316"
+    },
+    {
+      "title": "tennesseelookout.com",
+      "url": "https://tennesseelookout.com/2026/09/30/us-supreme-court-allows-execution-of-tennessee-woman-on-death-row-to-proceed/"
+    }
+  ],
+  "sensitive": false,
+  "image": null,
+  "generatedBy": "seed",
+  "updatedAt": "2026-10-04T15:29:25.383Z"
+}

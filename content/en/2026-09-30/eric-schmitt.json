@@ -1,0 +1,71 @@
+{
+  "lang": "en",
+  "date": "2026-09-30",
+  "rank": 19,
+  "slug": "eric-schmitt",
+  "title": "Eric Schmitt",
+  "wikipediaUrl": "https://en.wikipedia.org/wiki/Eric_Schmitt",
+  "views": 89855,
+  "series": [
+    306,
+    242,
+    267,
+    303,
+    528,
+    294,
+    296,
+    368,
+    360,
+    374,
+    296,
+    242,
+    227,
+    336,
+    395,
+    446,
+    327,
+    498,
+    288,
+    436,
+    414,
+    446,
+    332,
+    471,
+    319,
+    226,
+    251,
+    493,
+    52787,
+    89855
+  ],
+  "spike": 270.6,
+  "headline": "Eric Schmitt",
+  "dek": "The Missouri senator accused Jack Smith of lying about being at an Atlanta Hawks game.",
+  "whatItIs": "A Republican US senator from Missouri, in office since 2023.",
+  "whyNow": "The Missouri senator accused Jack Smith of lying about being at an Atlanta Hawks game. Smith had been at an Iowa Hawkeyes college game in Maryland. Schmitt had mixed up the two teams, and the clip spread fast. Senator Katie Britt's stunned face beside him became its own meme and put her page in the top 30.",
+  "body": [],
+  "category": "viral",
+  "confidence": "confirmed",
+  "sources": [
+    {
+      "title": "thehill.com",
+      "url": "https://thehill.com/homenews/senate/6119172-schmitt-smith-basketball-mixup/"
+    },
+    {
+      "title": "ca.news.yahoo.com",
+      "url": "https://ca.news.yahoo.com/viral-slow-zoom-katie-britt-012507794.html"
+    }
+  ],
+  "sensitive": false,
+  "image": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/27/Sen._Eric_Schmitt%2C_official_portrait%2C_118th_Congress.jpg/1280px-Sen._Eric_Schmitt%2C_official_portrait%2C_118th_Congress.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "width": 1200,
+    "height": 1476,
+    "file": "File:Sen. Eric Schmitt, official portrait, 118th Congress.jpg",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Sen._Eric_Schmitt,_official_portrait,_118th_Congress.jpg",
+    "artist": "United States Senate",
+    "license": "Public domain"
+  },
+  "generatedBy": "seed",
+  "updatedAt": "2026-10-04T15:29:27.436Z"
+}

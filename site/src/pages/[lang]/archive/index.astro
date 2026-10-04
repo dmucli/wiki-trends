@@ -1,0 +1,33 @@
+---
+import Base from "../../../layouts/Base.astro";
+import { edition, editionDates, editionHref, formatDate, LANGS, t, type Lang } from "../../../lib/content.ts";
+
+export function getStaticPaths() {
+  return LANGS.map((lang) => ({ params: { lang } }));
+}
+const lang = Astro.params.lang as Lang;
+const s = t(lang);
+const dates = editionDates(lang);
+---
+<Base lang={lang} title={s.archive} altHref={`/${lang === "en" ? "fr" : "en"}/archive/`}>
+  <h1 class="page-title">{s.allEditions}</h1>
+  <ol class="editions">
+    {dates.map((d) => {
+      const top = edition(lang, d).entries.slice(0, 3);
+      return (
+        <li>
+          <a class="day" href={editionHref(lang, d)}>{formatDate(lang, d)}</a>
+          <span class="meta">{top.map((e) => e.title).join(" · ")}</span>
+        </li>
+      );
+    })}
+  </ol>
+</Base>
+<style>
+  .page-title { font-size: clamp(2rem, 5vw, 3rem); margin: 0 0 1.5rem; letter-spacing: -.03em; }
+  .editions { list-style: none; padding: 0; margin: 0; }
+  .editions li { padding: .9rem 0; border-top: 1px solid var(--line); display: grid; gap: .2rem; }
+  .day { font-family: var(--display); font-weight: 650; font-size: 1.15rem; text-decoration: none; }
+  .day::first-letter { text-transform: uppercase; }
+  .day:hover { text-decoration: underline; }
+</style>

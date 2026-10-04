@@ -1,0 +1,71 @@
+{
+  "lang": "fr",
+  "date": "2026-09-30",
+  "rank": 2,
+  "slug": "justin-bieber",
+  "title": "Justin Bieber",
+  "wikipediaUrl": "https://fr.wikipedia.org/wiki/Justin_Bieber",
+  "views": 49349,
+  "series": [
+    411,
+    425,
+    426,
+    398,
+    500,
+    463,
+    417,
+    406,
+    398,
+    380,
+    383,
+    446,
+    548,
+    561,
+    429,
+    461,
+    398,
+    508,
+    456,
+    436,
+    385,
+    466,
+    441,
+    392,
+    464,
+    483,
+    474,
+    440,
+    437,
+    49349
+  ],
+  "spike": 112.9,
+  "headline": "Justin Bieber",
+  "dek": "Mercredi soir, Hailey Bieber était chez Quotidien pour lancer sa marque Rhode en France.",
+  "whatItIs": "Chanteur canadien né en 1994, repéré adolescent grâce à ses vidéos YouTube et devenu l'une des plus grandes stars de la pop.",
+  "whyNow": "Mercredi soir, Hailey Bieber était chez Quotidien pour lancer sa marque Rhode en France. Elle a lâché : « Mon mari est français. » Yann Barthès est resté sans voix, et tout le monde est allé vérifier. Verdict : Justin Bieber est canadien, avec une mère d'origine canadienne-française. La page « Canadiens français » est entrée dans le top 100 le même soir.",
+  "body": [],
+  "category": "viral",
+  "confidence": "confirmed",
+  "sources": [
+    {
+      "title": "parismatch.be",
+      "url": "https://www.parismatch.be/actualites/people/2026/10/01/mon-mari-est-francais-hailey-bieber-cree-la-surprise-sur-le-plateau-de-quotidien-TG3K4FZSAFDVDLPUSZBTWSOQ3E/"
+    },
+    {
+      "title": "fr.news.yahoo.com",
+      "url": "https://fr.news.yahoo.com/sport/chez-quotidien-hailey-bieber-surpris-082544634.html"
+    }
+  ],
+  "sensitive": false,
+  "image": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/6/6c/P20260719DT-1213_President_Donald_J._Trump_and_First_Lady_Melania_Trump_attend_the_FIFA_World_Cup_Final_%28cropped_2%29.jpg?utm_source=fr.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+    "width": 1200,
+    "height": 1941,
+    "file": "Fichier:P20260719DT-1213 President Donald J. Trump and First Lady Melania Trump attend the FIFA World Cup Final (cropped 2).jpg",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:P20260719DT-1213_President_Donald_J._Trump_and_First_Lady_Melania_Trump_attend_the_FIFA_World_Cup_Final_(cropped_2).jpg",
+    "artist": "Daniel Torok",
+    "license": "Public domain"
+  },
+  "generatedBy": "seed",
+  "updatedAt": "2026-10-04T15:29:29.545Z"
+}

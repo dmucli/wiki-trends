@@ -1,0 +1,131 @@
+---
+import Base from "../../../../../layouts/Base.astro";
+import Picture from "../../../../../components/Picture.astro";
+import Sparkline from "../../../../../components/Sparkline.astro";
+import StoryCard from "../../../../../components/StoryCard.astro";
+import {
+  article, articleHref, edition, editionDates, editionHref, formatDate, formatViews, LANGS, t, type Lang,
+} from "../../../../../lib/content.ts";
+
+export function getStaticPaths() {
+  return LANGS.flatMap((lang) =>
+    editionDates(lang).flatMap((date) => {
+      const [y, m, d] = date.split("-");
+      return edition(lang, date).entries.map((e) => ({ params: { lang, y, m, d, slug: e.slug }, props: { date } }));
+    }),
+  );
+}
+
+const lang = Astro.params.lang as Lang;
+const { date } = Astro.props;
+const a = article(lang, date, Astro.params.slug!);
+const s = t(lang);
+const related = edition(lang, date).entries.filter((e) => e.slug !== a.slug).slice(0, 6);
+const paragraphs = a.body.length ? a.body : [a.whyNow];
+const peak = Math.max(...a.series);
+const url = new URL(articleHref(a), Astro.site).toString();
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "NewsArticle",
+  headline: a.headline,
+  description: a.dek,
+  datePublished: a.updatedAt,
+  dateModified: a.updatedAt,
+  inLanguage: lang,
+  mainEntityOfPage: url,
+  image: a.image ? [a.image.url] : undefined,
+  author: { "@type": "Organization", name: s.siteName },
+  publisher: { "@type": "Organization", name: s.siteName },
+  about: { "@type": "Thing", name: a.title, sameAs: a.wikipediaUrl },
+  citation: a.sources.map((x) => x.url),
+};
+const [prevDate, prevSlug] = a.continuedFrom?.split("/") ?? [];
+---
+<Base lang={lang} title={a.headline} description={a.dek} image={a.image?.url} jsonLd={jsonLd} editionDate={date}
+  altHref={`/${lang === "en" ? "fr" : "en"}/`}>
+  <article class={`story cat-${a.category}`}>
+    <header class="head">
+      <a class="kicker" href={`/${lang}/category/${a.category}/`}>{s.categories[a.category]}</a>
+      <h1>{a.headline}</h1>
+      {a.dek && <p class="dek">{a.dek}</p>}
+      <p class="meta byline">
+        {s.byline} · <a href={editionHref(lang, date)}>{formatDate(lang, date)}</a>
+      </p>
+    </header>
+
+    <div class="hero"><Picture image={a.image} alt={a.title} label={a.title} category={a.category} lang={lang} series={a.series} views={a.views} credit eager ratio="16 / 9" /></div>
+
+    <div class="layout">
+      <div class="body">
+        {prevDate && (
+          <p class="note meta">{s.stillTrending} <a href={articleHref({ date: prevDate, slug: prevSlug }, lang)}>{formatDate(lang, prevDate)}</a>.</p>
+        )}
+        {paragraphs.map((p, i) => <p class={i === 0 ? "first" : undefined}>{p}</p>)}
+
+        <section class="sources">
+          <h2 class="section-title">{s.sources}</h2>
+          {a.sources.length ? (
+            <ul>{a.sources.map((src) => <li><a href={src.url} rel="noopener nofollow">{src.title}</a>{src.publisher && <span class="meta"> · {src.publisher}</span>}</li>)}</ul>
+          ) : <p class="meta">{s.noSources}</p>}
+          <p><a class="wiki" href={a.wikipediaUrl}>{s.readOnWikipedia} →</a></p>
+        </section>
+      </div>
+
+      <aside class="side">
+        <div class="box">
+          <h2 class="box-title">{s.whatItIs}</h2>
+          <p>{a.whatItIs}</p>
+        </div>
+        <div class="box stats">
+          <p class="big">{formatViews(lang, a.views)}</p>
+          <p class="meta">{s.views} · {s.rank} {a.rank} · {formatDate(lang, date, { day: "numeric", month: "long" })}</p>
+          {a.spike > 1.5 && a.spike < 99 && <p class="meta"><strong>{a.spike.toLocaleString(s.dateLocale)}{s.spike}</strong></p>}
+          <Sparkline series={a.series} width={260} height={70} label={`${s.last30}: ${formatViews(lang, peak)} max`} />
+          <p class="meta">{s.last30}</p>
+        </div>
+        <p class={`confidence ${a.confidence}`}>{s.confidence[a.confidence]}</p>
+      </aside>
+    </div>
+  </article>
+
+  {related.length > 0 && (
+    <section class="related">
+      <h2 class="section-title">{s.relatedToday} <a href={editionHref(lang, date)}>{s.seeAll}</a></h2>
+      <div class="related-grid">
+        {related.map((e) => <StoryCard entry={e} date={date} lang={lang} variant="compact" />)}
+      </div>
+    </section>
+  )}
+</Base>
+
+<style>
+  .story { max-width: 62rem; margin: 0 auto; }
+  .head { max-width: 46rem; display: grid; gap: .6rem; margin-bottom: 1.5rem; }
+  h1 { font-size: clamp(2rem, 5.5vw, 3.4rem); line-height: 1.02; letter-spacing: -.035em; font-weight: 750; }
+  .dek { font-size: 1.3rem; line-height: 1.4; margin: 0; }
+  .byline { margin: .3rem 0 0; }
+  .byline a { color: inherit; }
+  .hero { margin-bottom: 2rem; }
+  .layout { display: grid; gap: 2rem; }
+  .layout > * { min-width: 0; }
+  @media (min-width: 860px) { .layout { grid-template-columns: minmax(0, 1fr) 17rem; gap: 3rem; } }
+  .body { max-width: 40rem; font-size: 1.15rem; line-height: 1.65; }
+  .body p { margin: 0 0 1.1rem; }
+  .body .first::first-letter { font-family: var(--display); font-weight: 800; float: left; font-size: 3.6em; line-height: .82; padding: .06em .08em 0 0; color: var(--c); }
+  .note { border-left: 3px solid var(--c); padding-left: .75rem; }
+  .sources { margin-top: 2.5rem; font-size: 1rem; }
+  .sources ul { margin: 0 0 1rem; padding-left: 1.1rem; }
+  .sources li { margin-bottom: .35rem; overflow-wrap: anywhere; }
+  .wiki { font-family: var(--display); font-weight: 650; }
+  .side { display: grid; gap: 1.25rem; align-content: start; }
+  .box { border-top: 3px solid var(--c); padding-top: .7rem; }
+  .box p { margin: 0 0 .4rem; }
+  .box-title { font-size: .8rem; text-transform: uppercase; letter-spacing: .06em; color: var(--c); margin-bottom: .35rem; }
+  .big { font-family: var(--display); font-weight: 800; font-size: 2.4rem; letter-spacing: -.04em; line-height: 1; color: var(--c); }
+  .stats :global(.spark) { width: 100%; height: 70px; margin-top: .6rem; }
+  .confidence { font-family: var(--display); font-size: .85rem; font-weight: 650; display: inline-flex; align-items: center; gap: .45rem; margin: 0; }
+  .confidence::before { content: ""; width: .6rem; height: .6rem; border-radius: 50%; background: currentColor; }
+  .confirmed { color: var(--sport); } .likely { color: var(--viral); } .hypothesis { color: var(--soft); }
+  .related { margin-top: 4rem; }
+  .related-grid { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 11rem), 1fr)); }
+</style>

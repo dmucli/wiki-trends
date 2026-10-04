@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Why is Wikipedia reading this?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..600&display=swap" rel="stylesheet">
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  --bg:#EDF0F3; --surface:#F8FAFB; --ink:#14202B; --soft:#51606E; --line:#CBD3DA;
+  --news:#B4342D; --sport:#1B7550; --screen:#5B3FA8; --death:#46525E;
+  --viral:#B85A08; --evergreen:#1C6C88; --mystery:#7D6E00;
+  --display:"Bricolage Grotesque","Avenir Next","Segoe UI",system-ui,sans-serif;
+  --text:"Newsreader","Iowan Old Style","Palatino Linotype",Georgia,serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#10171E; --surface:#17212B; --ink:#E7EDF2; --soft:#9AA9B6; --line:#2C3A47;
+    --news:#F0766D; --sport:#5CC79B; --screen:#B29CF5; --death:#A9B6C2;
+    --viral:#F2A257; --evergreen:#6CC3E0; --mystery:#D9C84A;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#10171E; --surface:#17212B; --ink:#E7EDF2; --soft:#9AA9B6; --line:#2C3A47;
+  --news:#F0766D; --sport:#5CC79B; --screen:#B29CF5; --death:#A9B6C2;
+  --viral:#F2A257; --evergreen:#6CC3E0; --mystery:#D9C84A;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--text);font-size:1.0625rem;line-height:1.55}
+a{color:inherit;text-underline-offset:.18em;text-decoration-thickness:1px}
+a:hover{text-decoration-thickness:2px}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4px}
+.wrap{max-width:60rem;margin:0 auto;padding:2.5rem 1.25rem 4rem}
+
+header h1{text-wrap:balance;font-family:var(--display);font-weight:750;font-size:clamp(2.3rem,8.5vw,4.6rem);line-height:.98;letter-spacing:-.035em;margin:0 0 1.1rem;max-width:13ch}
+header p{margin:0;max-width:38rem;color:var(--soft);font-size:1.15rem}
+
+.share{margin:2.4rem 0 .9rem}
+.share-title{font-family:var(--display);font-size:.9rem;color:var(--soft);margin:0 0 .5rem}
+.bar{display:flex;height:2.4rem;border-radius:.6rem;overflow:hidden;gap:2px}
+.bar button{appearance:none;border:0;padding:0;min-width:6px;cursor:pointer;background:var(--c);opacity:1;transition:opacity .15s}
+.bar.filtered button:not(.on){opacity:.22}
+.filters{display:flex;flex-wrap:wrap;gap:.5rem;margin:0 0 2.2rem}
+.filters button{appearance:none;font-family:var(--display);font-size:.9rem;font-weight:500;color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:999px;padding:.4rem .8rem .42rem;cursor:pointer;display:inline-flex;align-items:center;gap:.45rem}
+.filters button .dot{width:.6rem;height:.6rem;border-radius:50%;background:var(--c)}
+.filters button .n{color:var(--soft);font-variant-numeric:tabular-nums}
+.filters button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.filters button[aria-pressed="true"] .n{color:inherit;opacity:.7}
+
+ol.list{list-style:none;margin:0;padding:0}
+.item{display:grid;grid-template-columns:3.2rem minmax(0,1fr) 12rem;column-gap:1rem;padding:1.6rem 0;border-top:1px solid var(--line)}
+.rank{font-family:var(--display);font-weight:750;font-size:2rem;line-height:1;letter-spacing:-.03em;color:var(--c);font-variant-numeric:tabular-nums;padding-top:.15rem}
+.item h2{font-family:var(--display);font-weight:650;font-size:1.45rem;line-height:1.15;letter-spacing:-.015em;margin:0 0 .45rem}
+.item h2 a{text-decoration:none}
+.item h2 a:hover{text-decoration:underline}
+.meta{font-family:var(--display);font-size:.875rem;color:var(--soft);margin:0 0 .7rem;display:flex;flex-wrap:wrap;gap:.3rem 1rem;align-items:center}
+.chip{color:var(--c);font-weight:650;display:inline-flex;align-items:center;gap:.4rem}
+.chip::before{content:"";width:.55rem;height:.55rem;border-radius:50%;background:var(--c)}
+.what{margin:0 0 .55rem;max-width:36rem;color:var(--soft)}
+.why{margin:0 0 .7rem;max-width:36rem}
+.what b,.why b{font-family:var(--display);font-size:.84rem;font-weight:650;color:var(--c);margin-right:.25rem}
+.conf{font-family:var(--display);font-size:.84rem;color:var(--soft);margin:0}
+.conf b{font-weight:650;color:var(--ink)}
+.spark{align-self:start;padding-top:.3rem}
+.spark svg{display:block;width:100%;height:auto;overflow:visible}
+.spark figcaption{font-family:var(--display);font-size:.78rem;color:var(--soft);margin-top:.35rem}
+figure{margin:0}
+
+footer{border-top:1px solid var(--line);margin-top:.5rem;padding-top:1.5rem;color:var(--soft);font-size:.98rem;max-width:40rem}
+footer p{margin:0 0 .8rem}
+.empty{padding:2rem 0;color:var(--soft)}
+
+@media (max-width:640px){
+  .wrap{padding-top:1.75rem}
+  .item{grid-template-columns:2.4rem minmax(0,1fr);row-gap:.9rem}
+  .rank{font-size:1.5rem}
+  .spark{grid-column:2;max-width:15rem}
+  .item h2{font-size:1.3rem}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+.top{display:flex;justify-content:flex-end;margin-bottom:1.6rem}
+.lang{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:3px;gap:2px}
+.lang button{appearance:none;border:0;background:transparent;color:var(--soft);font-family:var(--display);font-size:.9rem;font-weight:550;padding:.38rem .9rem .4rem;border-radius:999px;cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.item.nochart{grid-template-columns:3.2rem minmax(0,1fr)}
+.item.nochart .why,.item.nochart .what{max-width:42rem}
+@media (max-width:640px){.item.nochart{grid-template-columns:2.4rem minmax(0,1fr)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div class="lang" role="group" aria-label="Language / Langue">
+      <button type="button" data-lang="en" lang="en" aria-pressed="true">English</button>
+      <button type="button" data-lang="fr" lang="fr" aria-pressed="false">Français</button>
+    </div>
+  </div>
+  <header>
+    <h1 id="h1">Why is Wikipedia reading this?</h1>
+    <p id="sub"></p>
+  </header>
+  <section class="share">
+    <p class="share-title" id="shareTitle"></p>
+    <div class="bar" id="bar"></div>
+  </section>
+  <div class="filters" id="filters" role="group"></div>
+  <ol class="list" id="list"></ol>
+  <footer id="foot"></footer>
+</div>
+<script>
+const S_EN = {
+  abc:["ABC News","https://abcnews.com/US/wireStory/tennessee-prepares-execute-woman-crime-committed-age-18-136878316"],
+  lookout:["Tennessee Lookout","https://tennesseelookout.com/2026/09/30/us-supreme-court-allows-execution-of-tennessee-woman-on-death-row-to-proceed/"],
+  nbc:["NBC Chicago","https://www.nbcchicago.com/news/local/cornell-7-what-happened-with-the-case-what-to-know-as-prosecutor-reopens-investigation/3995362/"],
+  gma:["Good Morning America","https://www.goodmorningamerica.com/culture/story/chad-lowe-shares-memories-daughter-after-death-13-136889181"],
+  hill:["The Hill","https://thehill.com/homenews/senate/6119172-schmitt-smith-basketball-mixup/"],
+  yahoo:["Yahoo News","https://ca.news.yahoo.com/viral-slow-zoom-katie-britt-012507794.html"],
+  sky:["Sky Sports","https://www.skysports.com/cricket/news/13593773/india-vs-west-indies-shubman-gill-hits-223-not-out-on-day-of-records-as-hosts-chase-down-406-to-beat-west-indies-in-second-odi"],
+  wbur:["WBUR","https://www.wbur.org/news/2026/09/30/red-sox-loss-yankees-wild-card-schlittler-rice-tolle"],
+  hat:["Hatnote Top 100","https://top.hatnote.com/en/wikipedia/2026/9/30.html"]
+};
+const DATA_EN = [
+ {t:"Christa Pike",w:"An American woman on death row in Tennessee for a murder she committed in 1995, when she was 18.",c:"news",k:"confirmed",streak:"9 days on the chart",d:[0,55927,77584,70756,85070,131276,145932,190062,507058,1334670],
+  why:"Tennessee tried to execute her on Wednesday night and failed. She survived two doses of the lethal injection drug and was taken to hospital, and Governor Bill Lee has halted the state's one remaining execution this year. She would have been the first woman executed in Tennessee in more than 200 years, which is why her page had been climbing all week before it exploded.",s:["abc","lookout"]},
+ {t:"2026 Asian Games medal table",w:"The running count of gold, silver and bronze medals won by each country at the 2026 Asian Games.",c:"sport",k:"confirmed",streak:"9+ days on the chart",d:[54520,121924,117681,152884,142386,259696,227528,221798,293009,363735],
+  why:"The Asian Games are running in Aichi and Nagoya, Japan, until 4 October. People check the medal table like a league table: every day, and more often as the finals pile up in the last week.",s:["hat"]},
+ {t:"India at the 2026 Asian Games",w:"The page that tracks India's athletes and results at the 2026 Asian Games in Japan.",c:"sport",k:"likely",streak:"9+ days on the chart",d:[106582,137927,145207,147487,183850,260257,213653,204445,264677,343622],
+  why:"India sent 495 athletes and English Wikipedia has a huge Indian readership, so this page tracks the medal table closely. It got an extra push when Vithya Ramraj broke P. T. Usha's national record in the 400 m hurdles, a mark that had stood since the 1984 Olympics. Her own page entered the top 100 the same day.",s:["hat"]},
+ {t:"Cornell 7",w:"The name given to seven Cornell University fraternity members accused in a 2024 sexual assault case.",c:"news",k:"confirmed",streak:"First day on the chart",d:[0,0,0,0,0,0,0,0,0,261954],
+  why:"A brand-new article. In mid-September a former Cornell student sued the university and seven members of its Chi Phi fraternity, alleging she was drugged and raped at the fraternity house in 2024. The nickname spread on social media, the local prosecutor reopened the criminal investigation, and Wikipedia now has a page for the case. These are allegations, and at least one of the men has denied them through his lawyer.",s:["nbc"]},
+ {t:"2026 Asian Games",w:"Asia's biggest multi-sport event, held every four years. This edition is in Aichi and Nagoya, Japan.",c:"sport",k:"confirmed",streak:"9+ days on the chart",d:[147848,188420,163446,161196,180326,229525,186716,164566,202279,254153],
+  why:"The main article for the same event. Three of the top five pages are the Asian Games, which tells you how much of English Wikipedia's audience is in Asia.",s:["hat"]},
+ {t:"Lizzie Borden",w:"An American woman tried and acquitted of killing her father and stepmother with an axe in 1892.",c:"screen",k:"likely",streak:"9+ days on the chart",d:[806041,679382,586575,479143,402780,421359,440478,326311,266498,241777],
+  why:"Netflix's Monster: The Lizzie Borden Story. Viewers finish an episode and go check what really happened in Fall River in 1892. The page is sliding down from 806,000 ten days ago, the classic curve after a streaming premiere. The series page and lead actress Ella Beatty are both further down the top 100.",s:["hat"]},
+ {t:"Ted Kaczynski",w:"The American mathematician known as the Unabomber, who ran a years-long bombing campaign. He died in 2023.",c:"screen",k:"confirmed",streak:"6 days on the chart",d:[0,0,0,0,169244,376033,438924,287676,235730,220340],
+  why:"Netflix released Unabomber, with Russell Crowe, on 25 September. His page appeared on the chart that day, peaked two days later and is easing off now.",s:["hat"]},
+ {t:"Chad Lowe",w:"An American actor and director, Emmy winner for Life Goes On, and the younger brother of Rob Lowe.",c:"death",k:"confirmed",streak:"First day on the chart",d:[0,0,0,0,0,0,0,0,0,186919],
+  why:"A sad one. The actor and his wife, producer Kim Painter, confirmed on Wednesday that their 13-year-old daughter Fiona has died. His brother Rob Lowe's page rose the same day.",s:["gma"]},
+ {t:"Theory of mind",w:"A psychology concept: the ability to understand that other people have beliefs, desires and thoughts different from your own.",c:"mystery",k:"unsolved",streak:"First day on the chart",d:[0,0,0,0,0,0,0,0,0,183160],
+  why:"I couldn't find a news hook. When an academic psychology article jumps to 183,000 views in one day, it's usually a viral post linking to it, a quiz or puzzle answer, or automated traffic. Nothing in the coverage I checked points to which.",s:[]},
+ {t:"Instagram",w:"The photo and video sharing app owned by Meta.",c:"mystery",k:"unsolved",streak:"First day on the chart",d:[0,0,0,0,0,0,0,0,0,162453],
+  why:"Also unsolved. Big brand pages like this sometimes jump when an outage or an app change sends people searching, and sometimes it's bots. I found no clear trigger for Wednesday.",s:[]},
+ {t:"Esther Rantzen",w:"An English journalist and television presenter, a household name in Britain since the 1970s.",c:"death",k:"confirmed",streak:"First day on the chart",d:[0,0,0,0,0,0,0,0,0,157605],
+  why:"The British broadcaster died on 30 September, aged 86. She presented That's Life! on the BBC for 21 years and founded the children's helpline Childline. Her late husband Desmond Wilcox entered the top 100 too, as readers clicked through from her page.",s:["hat"]},
+ {t:".xxx",w:"An internet domain ending, like .com, created for adult websites.",c:"mystery",k:"likely",streak:"9+ days on the chart",d:[135167,128307,137118,170417,116679,203690,186029,119989,164698,151234],
+  why:"No news here. This page about a web domain has sat between 115,000 and 205,000 views a day for well over a week. Real curiosity comes in spikes and then fades. A level line like this points to automated traffic or mistyped web addresses landing on Wikipedia.",s:[]},
+ {t:"Deaths in 2026",w:"Wikipedia's running list of notable people who have died this year.",c:"evergreen",k:"confirmed",streak:"9+ days on the chart",d:[144135,137453,139569,137396,133091,124353,125670,145719,142602,143228],
+  why:"It never leaves the list. Around 140,000 people check who has died, every single day, with almost no variation. It is the steadiest line on the page.",s:[]},
+ {t:"Digger (2026 film)",w:"A 2026 satirical black comedy film directed by Alejandro G. Iñárritu, starring Tom Cruise.",c:"screen",k:"likely",streak:"9 days on the chart",d:[0,47907,89741,57471,44356,44072,40153,45367,100387,132785],
+  why:"Views tripled in two days, the pattern you get when reviews land and a release is close. I didn't verify the exact release date, so take the timing as an educated read of the curve.",s:["hat"]},
+ {t:"Dancing with the Stars (American TV series) season 35",w:"The current season of the American TV contest that pairs celebrities with professional dancers.",c:"screen",k:"likely",streak:"Back on the chart",d:[0,0,121661,0,0,0,0,0,0,119761],
+  why:"Tuesday night is episode night on ABC, and the page spikes right after. Look at the chart: one bump a week ago, another now. People come to see who danced what and who went home.",s:["hat"]},
+ {t:"Aileen Wuornos",w:"An American serial killer who shot seven men in Florida in 1989 and 1990. She was executed in 2002.",c:"screen",k:"guess",streak:"9+ days on the chart",d:[163874,176132,160292,138738,121979,119893,135742,113113,109925,111369],
+  why:"A slow fade instead of a spike. My best guess is spillover: the Lizzie Borden series has people reading about other women accused of murder, and coverage of Christa Pike kept mentioning the few women executed in the US, Wuornos among them. I can't prove either link.",s:[]},
+ {t:"Ben Rice",w:"A first baseman for the New York Yankees baseball team.",c:"sport",k:"confirmed",streak:"First day on the chart",d:[0,0,0,0,0,0,0,0,0,94002],
+  why:"Two home runs, one of them a grand slam, and six RBIs as the Yankees beat the Red Sox 9-0 in Game 1 of the AL Wild Card Series. Boston is his hometown team, which made the story even better.",s:["wbur"]},
+ {t:"Jack Smith (lawyer)",w:"The American prosecutor who, as special counsel, led the federal investigations into Donald Trump.",c:"viral",k:"confirmed",streak:"2 days on the chart",d:[0,0,0,0,0,0,0,0,54696,92432],
+  why:"The former special counsel testified before the Senate Judiciary Committee on Tuesday. The hearing went viral because of one exchange with Senator Eric Schmitt, next on this list.",s:["hill"]},
+ {t:"Eric Schmitt",w:"A Republican US senator from Missouri, in office since 2023.",c:"viral",k:"confirmed",streak:"2 days on the chart",d:[0,0,0,0,0,0,0,0,52787,89855],
+  why:"The Missouri senator accused Jack Smith of lying about being at an Atlanta Hawks game. Smith had been at an Iowa Hawkeyes college game in Maryland. Schmitt had mixed up the two teams, and the clip spread fast. Senator Katie Britt's stunned face beside him became its own meme and put her page in the top 30.",s:["hill","yahoo"]},
+ {t:".xyz",w:"A general-purpose internet domain ending, like .com.",c:"mystery",k:"likely",streak:"9+ days on the chart",d:[257104,126011,66781,34892,48109,65899,73037,76413,70081,86047],
+  why:"Same story as .xxx: a page about a web domain ending with tens of thousands of daily views and no news behind it. Almost certainly automated traffic.",s:[]},
+ {t:"Neatsville, Kentucky",w:"A tiny unincorporated community in Adair County, Kentucky.",c:"mystery",k:"likely",streak:"9+ days on the chart",d:[102848,105605,94599,82020,80017,65864,66250,93633,85002,81056],
+  why:"A place this small does not get 80,000 real readers a day. The line has been flat for more than a week, so this is very likely a bot or a link baked into some app or device.",s:[]},
+ {t:"Pac (wrestler)",w:"An English professional wrestler, real name Benjamin Satterley, known as Neville in WWE and Pac in AEW.",c:"death",k:"confirmed",streak:"3 days on the chart",d:[0,0,0,0,0,0,0,806988,187075,79164],
+  why:"The English wrestler, known as Neville in WWE and Pac in AEW, died on 27 September at 40. His page hit 807,000 views when the news broke and is tailing off, the usual shape for an unexpected death.",s:["hat"]},
+ {t:"Primetime (film)",w:"A 2026 psychological thriller about the making of the reality TV show To Catch a Predator.",c:"screen",k:"likely",streak:"9 days on the chart",d:[0,40350,53413,59076,134102,159635,132649,106438,83767,78157],
+  why:"Robert Pattinson plays the show's host, Chris Hansen. Views peaked around 26 September and are fading, which fits a film in its first week out. Chris Hansen's own page is in the top 100 as well.",s:["hat"]},
+ {t:"Shubman Gill",w:"An Indian cricketer who captains the national team in Tests and one-day internationals.",c:"sport",k:"confirmed",streak:"First day on the chart",d:[0,0,0,0,0,0,0,0,0,77582],
+  why:"He scored 223 not out off 133 balls as India chased down 406 against West Indies in Guwahati. It was only the second successful chase of 400 or more in one-day international history. The list of highest ODI scores started trending at the same time.",s:["sky"]},
+ {t:"Cam Schlittler",w:"A 25-year-old starting pitcher for the New York Yankees.",c:"sport",k:"confirmed",streak:"First day on the chart",d:[0,0,0,0,0,0,0,0,0,77571],
+  why:"The other half of the Yankees story. He threw 6.1 scoreless innings with 10 strikeouts against Boston, the team he grew up supporting.",s:["wbur"]}
+];
+const S_FR = {
+  match:["Paris Match Belgique","https://www.parismatch.be/actualites/people/2026/10/01/mon-mari-est-francais-hailey-bieber-cree-la-surprise-sur-le-plateau-de-quotidien-TG3K4FZSAFDVDLPUSZBTWSOQ3E/"],
+  yahoofr:["Yahoo Actualités","https://fr.news.yahoo.com/sport/chez-quotidien-hailey-bieber-surpris-082544634.html"],
+  freebox:["Univers Freebox","https://www.universfreebox.com/article/597774/france-tv-met-en-ligne-soeurs-avec-lola-dewaere-avant-sa-diffusion-sur-france-2"],
+  wikisoeurs:["Wikipédia","https://fr.wikipedia.org/wiki/S%C5%93urs_(mini-s%C3%A9rie)"],
+  moustique:["Moustique","https://www.moustique.be/television/2026/09/30/les-films-a-la-tele-ce-mercredi-30-septembre-entre-lhumour-ravageur-de-mash-et-lemotion-de-des-preuves-damour-que-regarder-ce-soir-X34YIZVES5CQXBTIB3C4R77ADI/"],
+  allafrica:["allAfrica","https://fr.allafrica.com/stories/202609290748.html"],
+  franceinfo:["franceinfo","https://www.franceinfo.fr/politique/jordan-bardella/la-suite-de-nos-revelation-arrive-promet-fabrice-arfi-de-mediapart-apres-les-accusations-d-antisemitisme-contre-jordan-bardella_8215730.html"],
+  eco:["L'Essentiel de l'Éco","https://lessentieldeleco.fr/8708-alain-soral-lantisemitisme-a-lere-des-reseaux-sociaux/"],
+  ozap:["Puremédias","https://www.ozap.com/actu/audiences-quel-score-pour-rendez-vous-en-terre-inconnue-avec-tony-parker-sur-france-2-face-a-koh-lanta-sur-tf1-et-la-stagiaire-sur-france-3/657209"],
+  canal:["Série News","https://www.serie-news.com/tnt/canal/canal-cinema/50694-nuremberg-sur-canal-cinema-russell-crowe-en-goring-face-au-psychiatre-de-rami-malek-avant-le-proces-du-siecle-30-09-2026/"],
+  rdj:["La Règle du jeu","https://laregledujeu.org/2026/09/28/51594/memoires-dune-enfant-du-siecle-le-livre-de-la-vie-de-bernard-henri-levy/"],
+  lgl:["Coulisses TV","https://www.coulisses-tv.fr/index.php/magazines/item/56257-la-grande-librairie-mercredi-30-septembre-2026,-les-invit%C3%A9s-re%C3%A7us-par-augustin-trapenard-sur-france-5"],
+  hatfr:["Hatnote Top 100","https://top.hatnote.com/fr/wikipedia/2026/9/30.html"]
+};
+const DATA_FR = [
+ {t:"Cookie (informatique)",w:"Un cookie est un petit fichier qu'un site web dépose dans le navigateur pour reconnaître un visiteur d'une page à l'autre.",c:"mystery",k:"guess",v:304107,
+  why:"Aucune actu derrière. 304 000 vues pour un article technique, c'est six fois plus que le numéro 2. Ça ressemble à du trafic automatique, ou à un lien « en savoir plus » glissé dans un bandeau cookies très fréquenté. Je ne peux pas trancher entre les deux.",s:[]},
+ {t:"Justin Bieber",w:"Chanteur canadien né en 1994, repéré adolescent grâce à ses vidéos YouTube et devenu l'une des plus grandes stars de la pop.",c:"viral",k:"confirmed",v:49349,
+  why:"Mercredi soir, Hailey Bieber était chez Quotidien pour lancer sa marque Rhode en France. Elle a lâché : « Mon mari est français. » Yann Barthès est resté sans voix, et tout le monde est allé vérifier. Verdict : Justin Bieber est canadien, avec une mère d'origine canadienne-française. La page « Canadiens français » est entrée dans le top 100 le même soir.",s:["match","yahoofr"]},
+ {t:"Sœurs (mini-série)",w:"Mini-série franco-belge en quatre épisodes, un thriller psychologique coproduit par France Télévisions et la RTBF.",c:"screen",k:"confirmed",v:36371,
+  why:"France 2 a lancé la série mercredi à 21 h 10 avec les deux premiers épisodes. Lola Dewaere y joue des jumelles dont l'échange d'identité tourne au drame. Près de 3 millions de personnes ont regardé, et une partie a ouvert Wikipédia en même temps.",s:["wikisoeurs","freebox"]},
+ {t:"Cette femme-là",w:"Film policier français de Guillaume Nicloux sorti en 2003, deuxième volet d'une trilogie.",c:"screen",k:"confirmed",v:35719,
+  why:"Arte a diffusé ce polar de 2003 mercredi à 20 h 55. Josiane Balasko y joue une flic à la dérive, un de ses rares grands rôles dramatiques. Les deux autres films de la trilogie de Guillaume Nicloux, « Une affaire privée » et « La Clef », sont montés dans le top 100, tout comme la fiche du réalisateur.",s:["moustique"]},
+ {t:"Fatima Ezzahra El Mansouri",w:"Avocate et femme politique marocaine née en 1976, maire de Marrakech et dirigeante du Parti authenticité et modernité (PAM).",c:"news",k:"confirmed",v:34407,
+  why:"Mardi 29 septembre, le roi Mohammed VI l'a nommée cheffe du gouvernement du Maroc. C'est la première femme à ce poste. Son parti, le PAM, est arrivé en tête des législatives du 23 septembre avec 97 sièges sur 395. Elle doit maintenant former une coalition.",s:["allafrica"]},
+ {t:"Lizzie Borden",w:"Américaine du XIXe siècle, au centre de l'un des faits divers les plus célèbres des États-Unis.",c:"screen",k:"likely",v:29907,
+  why:"L'effet Netflix. La saison 4 de « Monstre », sortie le 17 septembre, raconte son histoire : elle a été accusée d'avoir tué son père et sa belle-mère à la hache en 1892, puis acquittée. On finit un épisode, on va vérifier ce qui est vrai. Même phénomène côté anglophone, en bien plus gros.",s:["hatfr"]},
+ {t:"Liste de sondages sur l'élection présidentielle française de 2027",w:"Page qui recense tous les sondages d'intentions de vote pour la présidentielle française de 2027.",c:"news",k:"likely",v:23805,
+  why:"Le premier tour est dans moins de sept mois, le 18 avril 2027, et cette page sert de tableau de bord. Avec l'affaire Bardella qui occupe la semaine, beaucoup viennent voir où en sont les chiffres.",s:["hatfr"]},
+ {t:"Alain Soral",w:"Idéologue d'extrême droite franco-suisse, essayiste et figure du web, connu pour ses positions antisémites et complotistes.",c:"news",k:"likely",v:23766,
+  why:"Son nom revient partout dans la couverture de l'affaire Bardella-Mediapart (voir les numéros 13 et 14). Plusieurs médias ont republié son parcours mercredi. Condamné en février à deux ans de prison, visé par un mandat d'arrêt, il vit désormais à Moscou.",s:["eco","franceinfo"]},
+ {t:"Hailey Baldwin",w:"Mannequin et entrepreneuse américaine, plus connue aujourd'hui sous le nom de Hailey Bieber. C'est l'épouse de Justin Bieber.",c:"viral",k:"confirmed",v:22577,
+  why:"C'est elle, l'invitée de Quotidien. Sa phrase sur son mari « français » a fait le tour des réseaux dans la soirée. Son père, Stephen Baldwin, est entré dans le top 100 lui aussi.",s:["match"]},
+ {t:"Lionel Messi",w:"Footballeur argentin, attaquant de l'Inter Miami, considéré comme l'un des meilleurs joueurs de l'histoire.",c:"evergreen",k:"guess",v:22133,
+  why:"Je n'ai pas trouvé de déclencheur précis. Messi et Ronaldo font partie des pages qui reviennent sans arrêt dans le classement, portées par un fond de curiosité permanent. À prendre comme un habitué, pas comme une actu.",s:[]},
+ {t:"Theodore Kaczynski",w:"Terroriste américain surnommé Unabomber, mathématicien de formation, mort en 2023.",c:"screen",k:"confirmed",v:20943,
+  why:"Netflix a sorti le film « Unabomber », qui raconte son parcours, le 25 septembre, avec Russell Crowe. Depuis, sa fiche grimpe dans toutes les langues.",s:["hatfr"]},
+ {t:"Tony Parker",w:"Ancien meneur des San Antonio Spurs et de l'équipe de France de basket, retraité des parquets depuis 2019.",c:"screen",k:"confirmed",v:19015,
+  why:"Il était l'invité de « Rendez-vous en terre inconnue » mardi soir sur France 2. Laury Thilleman l'a emmené en Angola, chez les Ovakuvale. 2,29 millions de téléspectateurs, puis les extraits ont tourné toute la journée de mercredi.",s:["ozap"]},
+ {t:"Mediapart",w:"Journal d'investigation en ligne, fondé en 2007 par un groupe de journalistes dont Edwy Plenel.",c:"news",k:"confirmed",v:18921,
+  why:"Lundi, le site a publié une enquête attribuant à Jordan Bardella des propos antisémites qu'il aurait tenus il y a treize ans, à ses débuts au Front national. Bardella dément, parle de faux et annonce des plaintes. Mercredi matin sur franceinfo, Fabrice Arfi a répondu que « la suite arrive ». Les fiches d'Edwy Plenel et de Fabrice Arfi ont suivi.",s:["franceinfo"]},
+ {t:"Jordan Bardella",w:"Homme politique français né en 1995, président du Rassemblement national depuis 2021.",c:"news",k:"confirmed",v:17072,
+  why:"L'autre côté de la même affaire. Le président du RN conteste les révélations de Mediapart et a annoncé deux plaintes, l'une pour diffamation, l'autre pour faux et usage de faux. À sept mois de la présidentielle, sa page est scrutée.",s:["franceinfo"]},
+ {t:"Lola Dewaere",w:"Actrice française, fille de Patrick Dewaere, connue pour la série « Astrid et Raphaëlle ».",c:"screen",k:"confirmed",v:16555,
+  why:"Elle tient le double rôle principal de « Sœurs » sur France 2 (numéro 3). Le réflexe classique devant la télé : « Elle jouait dans quoi, déjà ? »",s:["freebox"]},
+ {t:"Digger (film, 2026)",w:"Comédie noire d'Alejandro González Iñárritu sortie en 2026, avec Tom Cruise dans le rôle-titre.",c:"screen",k:"likely",v:15493,
+  why:"La page monte aussi fortement en anglais, signe que la sortie et les critiques arrivent. Je n'ai pas vérifié la date de sortie française.",s:["hatfr"]},
+ {t:"Hermann Göring",w:"Dirigeant nazi de premier plan et criminel de guerre allemand, jugé au procès de Nuremberg et mort en 1946.",c:"screen",k:"confirmed",v:14473,
+  why:"Canal+ a diffusé le film « Nuremberg » mardi soir, puis Canal+ Cinéma mercredi à 21 h. Russell Crowe y joue Göring face au psychiatre Douglas Kelley. Le procès, le film, le psychiatre et même la fille de Göring sont dans le top 100.",s:["canal"]},
+ {t:"David Lisnard",w:"Homme politique français, maire de Cannes depuis 2014 et président de l'Association des maires de France.",c:"news",k:"unsolved",v:13805,
+  why:"Pas de déclencheur trouvé. Le maire de Cannes est très présent dans la précampagne présidentielle, et un passage télé ou radio suffit en général à produire ce genre de pic. C'est une supposition, pas une certitude.",s:[]},
+ {t:"Bernard-Henri Lévy",w:"Écrivain, philosophe et cinéaste français, figure médiatique depuis les années 1970, souvent appelé BHL.",c:"news",k:"confirmed",v:13457,
+  why:"Il publie ses « Mémoires provisoires », 864 pages, en librairie le 1er octobre. Une du Point, soirée de lancement, tournée des médias. Son ami Jean-Paul Enthoven, très présent dans le livre, est entré dans le top 100.",s:["rdj"]},
+ {t:"Laury Thilleman",w:"Animatrice de télévision française, élue Miss France 2011.",c:"screen",k:"confirmed",v:13142,
+  why:"Elle présente « Rendez-vous en terre inconnue » depuis 2025. C'est elle qui accompagnait Tony Parker en Angola mardi soir (numéro 12).",s:["ozap"]},
+ {t:"Edwy Plenel",w:"Journaliste politique français, passé par Le Monde, cofondateur de Mediapart.",c:"news",k:"likely",v:12304,
+  why:"Quand Mediapart sort une enquête qui fait du bruit, on va voir qui est derrière. Suite directe du numéro 13.",s:["franceinfo"]},
+ {t:"Cristiano Ronaldo",w:"Footballeur portugais, attaquant d'Al-Nassr en Arabie saoudite, meilleur buteur de l'histoire du football selon la FIFA.",c:"evergreen",k:"guess",v:12106,
+  why:"Même cas que Messi : un habitué du classement, sans actu particulière que j'aie pu identifier mercredi.",s:[]},
+ {t:"Jean-Paul Dubois",w:"Écrivain français né à Toulouse en 1950, prix Goncourt 2019.",c:"screen",k:"confirmed",v:11982,
+  why:"Il était l'invité de « La Grande Librairie » mercredi soir sur France 5 pour son nouveau roman, « Chacun ». Les autres invités de l'émission, Véronique Ovaldé, Louise Chennevière et Rachida Brakni, sont aussi dans le top 100.",s:["lgl"]},
+ {t:"Léon XIV",w:"Le pape actuel, élu le 8 mai 2025. Né à Chicago, c'est le premier pape originaire des États-Unis.",c:"news",k:"unsolved",v:11941,
+  why:"Non résolu. Je n'ai pas trouvé ce qui a ramené les lecteurs vers la fiche du pape mercredi.",s:[]},
+ {t:"XXX",w:"Page d'homonymie : « XXX » peut désigner le nombre 30 en chiffres romains, mais aussi bien d'autres choses.",c:"mystery",k:"likely",v:11744,
+  why:"Près de 12 000 vues sans aucune actu. Le Wikipédia anglophone connaît la même chose avec « .xxx » depuis plus d'une semaine. C'est très probablement du trafic automatique ou des adresses mal tapées.",s:[]}
+];
+
+const ED = {
+  en:{
+    lang:"en", wiki:"https://en.wikipedia.org/wiki/", data:DATA_EN, src:S_EN, history:true,
+    title:"Why is Wikipedia reading this?",
+    sub:"The 25 most-read articles on English Wikipedia on Wednesday 30 September 2026, each with the reason people went looking.",
+    lblWhat:"What it is",lblWhy:"Why now",share:"Where the day's top-25 views went", all:"All", views:"views", sources:"Sources:", chart:"21 to 30 September",
+    rank:"Rank", filter:"Filter by reason", pct:"of views", empty:"Nothing in this group today. Choose All to see the full list.",
+    off:"outside top 100", daily:"Daily views",
+    cats:{news:"Current events",sport:"Sport",screen:"Film and TV",death:"Deaths",viral:"Viral moment",evergreen:"Always popular",mystery:"Unexplained traffic"},
+    conf:{confirmed:"Confirmed",likely:"Likely",guess:"Best guess",unsolved:"Unsolved"},
+    foot:["Rankings and daily view counts come from Wikimedia's pageview data, read through the Hatnote Top 100. Each small chart covers 21 to 30 September. A gap in the line means the article was outside the top 100 that day, not that nobody read it.",
+          "The explanations were researched from news coverage on 1 October 2026. Where no cause turned up, the entry says so instead of guessing.",
+          "This page shows one day. Ask Claude in the chat for a new edition and the list gets rebuilt for the latest date."],
+    fmt:n=> n>=1e6 ? (n/1e6).toFixed(2).replace(/0$/,"")+"M" : Math.round(n/1e3)+"K"
+  },
+  fr:{
+    lang:"fr", wiki:"https://fr.wikipedia.org/wiki/", data:DATA_FR, src:S_FR, history:false,
+    title:"Pourquoi Wikipédia lit ça ?",
+    sub:"Les 25 articles les plus lus de Wikipédia en français le mercredi 30 septembre 2026, avec pour chacun la raison qui a poussé les gens à venir le lire.",
+    lblWhat:"C'est quoi ?",lblWhy:"Pourquoi maintenant ?",share:"Où sont parties les vues du top 25", all:"Tout", views:"vues", sources:"Sources :", chart:"",
+    rank:"Rang", filter:"Filtrer par raison", pct:"des vues", empty:"Rien dans ce groupe aujourd'hui. Choisissez Tout pour revoir la liste complète.",
+    off:"", daily:"",
+    cats:{news:"Actualité",sport:"Sport",screen:"Télé et cinéma",death:"Décès",viral:"Moment viral",evergreen:"Toujours populaires",mystery:"Trafic inexpliqué"},
+    conf:{confirmed:"Confirmé",likely:"Probable",guess:"Hypothèse",unsolved:"Non résolu"},
+    foot:["Le classement et les vues viennent des statistiques de consultation de Wikimedia, lues via le Top 100 de Hatnote. Pour l'édition française, Hatnote ne fournit pas encore l'historique jour par jour. Il n'y a donc pas de petites courbes ici.",
+          "Les explications ont été recherchées dans la presse le 1er octobre 2026. Quand je n'ai pas trouvé de cause, c'est écrit noir sur blanc.",
+          "Cette page montre une seule journée. Demandez une nouvelle édition à Claude dans la conversation pour la mettre à jour."],
+    fmt:n=> n>=1e6 ? (n/1e6).toFixed(2).replace(".",",")+" M" : Math.round(n/1e3)+" k"
+  }
+};
+const CATV = {news:"--news",sport:"--sport",screen:"--screen",death:"--death",viral:"--viral",evergreen:"--evergreen",mystery:"--mystery"};
+const DAYS = ["21 Sep","22 Sep","23 Sep","24 Sep","25 Sep","26 Sep","27 Sep","28 Sep","29 Sep","30 Sep"];
+
+const esc = s => String(s).replace(/[&<>"]/g, m => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
+// French typography: non-breaking spaces before high punctuation and inside guillemets
+const typo = (s, lang) => lang==="fr" ? s.replace(/ ([?!:;»])/g,"\u00a0$1").replace(/« /g,"«\u00a0").replace(/(\d) (h|k|M|%)(?=\W|$)/g,"$1\u00a0$2") : s;
+const views = x => x.v ?? x.d[9];
+
+function spark(d, color, E){
+  const W=200,H=56,p=5, max=Math.max(...d);
+  const x=i=>p+i*(W-2*p)/(d.length-1), y=v=>H-p-(v/max)*(H-2*p);
+  let paths="", seg=[], dots="";
+  const flush=()=>{ if(seg.length>1) paths+=`<polyline points="${seg.join(" ")}" fill="none" stroke="${color}" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>`;
+                    else if(seg.length===1){const [a,b]=seg[0].split(","); dots+=`<circle cx="${a}" cy="${b}" r="2.4" fill="${color}"/>`;} seg=[]; };
+  d.forEach((v,i)=>{ if(v>0) seg.push(x(i).toFixed(1)+","+y(v).toFixed(1)); else flush(); });
+  flush();
+  const lx=x(d.length-1), ly=y(d[d.length-1]);
+  const label=E.daily+", "+d.map((v,i)=>DAYS[i]+": "+(v? v.toLocaleString("en-US"):E.off)).join("; ");
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(label)}">
+    <line x1="${p}" y1="${H-p}" x2="${W-p}" y2="${H-p}" stroke="var(--line)" stroke-width="1" stroke-dasharray="2 3"/>
+    ${paths}${dots}<circle cx="${lx}" cy="${ly}" r="4" fill="${color}"/></svg>`;
+}
+
+let lang = "en", active = null;
+try { const saved = localStorage.getItem("wiki-why-lang"); if (saved === "fr" || saved === "en") lang = saved; } catch(e) {}
+
+const $ = id => document.getElementById(id);
+const list=$("list"), bar=$("bar"), filters=$("filters");
+
+function totals(E){
+  const out={}; E.data.forEach(x=>{ const o=out[x.c]||(out[x.c]={views:0,n:0}); o.views+=views(x); o.n++; });
+  return Object.entries(out).sort((a,b)=>b[1].views-a[1].views);
+}
+function renderChrome(){
+  const E=ED[lang];
+  document.documentElement.lang=E.lang; document.title=E.title;
+  $("h1").textContent=typo(E.title,lang); $("sub").textContent=typo(E.sub,lang);
+  $("shareTitle").textContent=E.share;
+  filters.setAttribute("aria-label",E.filter);
+  $("foot").innerHTML=E.foot.map(p=>`<p>${esc(typo(p,lang))}</p>`).join("");
+  document.querySelectorAll(".lang button").forEach(b=>b.setAttribute("aria-pressed", String(b.dataset.lang===lang)));
+}
+function renderControls(){
+  const E=ED[lang], t=totals(E), sum=t.reduce((a,[,o])=>a+o.views,0);
+  bar.className="bar"+(active?" filtered":"");
+  bar.innerHTML=t.map(([c,o])=>`<button type="button" tabindex="-1" aria-hidden="true" class="${active===c?"on":""}" data-c="${c}" style="--c:var(${CATV[c]});flex:${o.views} 1 0" title="${esc(E.cats[c])}: ${Math.round(o.views/sum*100)}% ${E.pct}"></button>`).join("");
+  filters.innerHTML=`<button type="button" data-c="" aria-pressed="${!active}">${E.all} <span class="n">${E.data.length}</span></button>`+
+    t.map(([c,o])=>`<button type="button" data-c="${c}" aria-pressed="${active===c}" style="--c:var(${CATV[c]})"><span class="dot"></span>${esc(E.cats[c])} <span class="n">${o.n}</span></button>`).join("");
+}
+function renderList(){
+  const E=ED[lang];
+  const rows=E.data.map((x,i)=>({...x,rank:i+1})).filter(x=>!active||x.c===active);
+  list.innerHTML=rows.map(x=>{
+    const cv=`var(${CATV[x.c]})`;
+    const src=x.s.length?" "+esc(typo(E.sources,lang))+" "+x.s.map(k=>`<a href="${E.src[k][1]}" target="_blank" rel="noopener">${esc(E.src[k][0])}</a>`).join(", ")+".":"";
+    const chart=E.history?`<figure class="spark">${spark(x.d,cv,E)}<figcaption>${E.chart}</figcaption></figure>`:"";
+    return `<li class="item${E.history?"":" nochart"}" style="--c:${cv}">
+      <div class="rank" aria-label="${E.rank} ${x.rank}">${x.rank}</div>
+      <div class="main">
+        <h2><a href="${E.wiki+encodeURIComponent(x.t.replace(/ /g,"_"))}" target="_blank" rel="noopener">${esc(x.t)}</a></h2>
+        <p class="meta"><span class="chip">${esc(E.cats[x.c])}</span><span>${typo(E.fmt(views(x))+" "+E.views,lang)}</span>${x.streak?`<span>${esc(x.streak)}</span>`:""}</p>
+        <p class="what"><b>${esc(typo(E.lblWhat,lang))}</b> ${esc(typo(x.w,lang))}</p>
+        <p class="why"><b>${esc(typo(E.lblWhy,lang))}</b> ${esc(typo(x.why,lang))}</p>
+        <p class="conf"><b>${E.conf[x.k]}.</b>${src}</p>
+      </div>${chart}
+    </li>`;
+  }).join("")||`<li class="empty">${esc(E.empty)}</li>`;
+}
+function setFilter(c){ active=c||null; renderControls(); renderList(); }
+function setLang(l){ lang=l; active=null; try{localStorage.setItem("wiki-why-lang",l);}catch(e){} renderChrome(); renderControls(); renderList(); }
+
+filters.addEventListener("click", e=>{ const b=e.target.closest("button"); if(b){ setFilter(b.dataset.c); const f=filters.querySelector('[aria-pressed="true"]'); if(f) f.focus(); } });
+bar.addEventListener("click", e=>{ const b=e.target.closest("button"); if(b) setFilter(active===b.dataset.c?"":b.dataset.c); });
+document.querySelector(".lang").addEventListener("click", e=>{ const b=e.target.closest("button"); if(b && b.dataset.lang!==lang) setLang(b.dataset.lang); });
+renderChrome(); renderControls(); renderList();
+</script>
+</body>
+</html>

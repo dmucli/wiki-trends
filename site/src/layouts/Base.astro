@@ -1,0 +1,99 @@
+---
+import "../styles/global.css";
+import { CATEGORIES } from "../../../types/article.ts";
+import { t, type Lang } from "../lib/content.ts";
+
+interface Props {
+  lang: Lang;
+  title?: string;
+  description?: string;
+  image?: string | null;
+  altHref?: string; // same page in the other language, when it exists
+  jsonLd?: object;
+  editionDate?: string;
+}
+const { lang, title, description, image, altHref, jsonLd, editionDate } = Astro.props;
+const s = t(lang);
+const other: Lang = lang === "en" ? "fr" : "en";
+const pageTitle = title ? `${title} · ${s.siteName}` : `${s.siteName}: ${s.tagline}`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const dateLine = new Date((editionDate ?? new Date().toISOString().slice(0, 10)) + "T12:00:00Z").toLocaleDateString(s.dateLocale, {
+  weekday: "long", day: "numeric", month: "long", year: "numeric", timeZone: "UTC",
+});
+---
+<!doctype html>
+<html lang={lang}>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{pageTitle}</title>
+  <meta name="description" content={description ?? s.tagline} />
+  <link rel="canonical" href={canonical} />
+  <link rel="alternate" type="application/rss+xml" title={`${s.siteName} (${lang.toUpperCase()})`} href={`/${lang}/rss.xml`} />
+  <meta property="og:site_name" content={s.siteName} />
+  <meta property="og:title" content={title ?? s.siteName} />
+  <meta property="og:description" content={description ?? s.tagline} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:locale" content={lang === "fr" ? "fr_FR" : "en_GB"} />
+  {image && <meta property="og:image" content={image} />}
+  <meta name="twitter:card" content={image ? "summary_large_image" : "summary"} />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..600&display=swap" rel="stylesheet" />
+  {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+</head>
+<body>
+  <header class="masthead">
+    <div class="wrap top">
+      <span class="meta date">{dateLine}</span>
+      <a class="lang-switch" href={altHref ?? `/${other}/`} hreflang={other} lang={other}>{s.otherLang}</a>
+    </div>
+    <div class="wrap brand">
+      <a href={`/${lang}/`} class="logo">Wiki<span>Trends</span></a>
+      <p class="tagline">{s.tagline}</p>
+    </div>
+    <nav class="wrap sections" aria-label="Sections">
+      <ul>
+        {CATEGORIES.map((c) => <li><a class={`cat-${c}`} href={`/${lang}/category/${c}/`}>{s.categories[c]}</a></li>)}
+        <li><a href={`/${lang}/archive/`}>{s.archive}</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main class="wrap">
+    <slot />
+  </main>
+  <footer class="site-footer">
+    <div class="wrap">
+      <a href={`/${lang}/`} class="logo small">Wiki<span>Trends</span></a>
+      <p>{s.aiNote}</p>
+      <p>
+        <a href={`/${lang}/about/`}>{s.about}</a> · <a href={`/${lang}/archive/`}>{s.archive}</a> · <a href={`/${lang}/rss.xml`}>RSS</a>
+      </p>
+      <p class="meta">
+        {lang === "fr"
+          ? "Données : statistiques de consultation Wikimedia. Textes Wikipédia sous licence CC BY-SA 4.0. Photos : Wikimedia Commons, crédits sous chaque image."
+          : "Data: Wikimedia pageview statistics. Wikipedia text under CC BY-SA 4.0. Photos: Wikimedia Commons, credited under each image."}
+      </p>
+    </div>
+  </footer>
+</body>
+</html>
+
+<style>
+  .masthead { border-bottom: 1px solid var(--line); margin-bottom: 1.75rem; }
+  .top { display: flex; justify-content: space-between; align-items: center; padding-top: .75rem; padding-bottom: .5rem; }
+  .date::first-letter { text-transform: uppercase; }
+  .lang-switch { font-family: var(--display); font-size: .85rem; font-weight: 600; border: 1px solid var(--line); border-radius: 999px; padding: .25rem .8rem; text-decoration: none; }
+  .lang-switch:hover { border-color: var(--ink); }
+  .brand { text-align: center; padding-top: .5rem; padding-bottom: .9rem; border-bottom: 3px double var(--rule); }
+  .logo { font-family: var(--display); font-weight: 800; font-size: clamp(2.4rem, 9vw, 4.4rem); letter-spacing: -.045em; line-height: 1; text-decoration: none; }
+  .logo span { font-weight: 400; font-style: normal; }
+  .logo.small { font-size: 1.6rem; }
+  .tagline { margin: .35rem 0 0; color: var(--soft); font-style: italic; }
+  .sections ul { list-style: none; margin: 0; padding: .55rem 0; display: flex; gap: .3rem 1.25rem; overflow-x: auto; scrollbar-width: none; justify-content: safe center; }
+  .sections a { font-family: var(--display); font-size: .88rem; font-weight: 600; text-decoration: none; white-space: nowrap; }
+  .sections a:hover { color: var(--c, var(--ink)); text-decoration: underline; }
+  .site-footer { border-top: 3px double var(--rule); margin-top: 4rem; padding: 1.75rem 0 3rem; color: var(--soft); }
+  .site-footer p { max-width: 44rem; margin: .7rem 0 0; }
+</style>

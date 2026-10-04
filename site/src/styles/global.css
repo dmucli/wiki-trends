@@ -1,0 +1,50 @@
+/* Tokens carried over from why-wikipedia-is-reading-this.html */
+:root {
+  --bg: #F6F4EF; --surface: #FFFFFF; --ink: #14202B; --soft: #51606E; --line: #D7D2C8; --rule: #14202B;
+  --news: #B4342D; --sport: #1B7550; --screen: #5B3FA8; --death: #46525E;
+  --viral: #B85A08; --evergreen: #1C6C88; --mystery: #7D6E00;
+  --display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --text: "Newsreader", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --wrap: 76rem;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #10171E; --surface: #17212B; --ink: #E7EDF2; --soft: #9AA9B6; --line: #2C3A47; --rule: #E7EDF2;
+    --news: #F0766D; --sport: #5CC79B; --screen: #B29CF5; --death: #A9B6C2;
+    --viral: #F2A257; --evergreen: #6CC3E0; --mystery: #D9C84A;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #10171E; --surface: #17212B; --ink: #E7EDF2; --soft: #9AA9B6; --line: #2C3A47; --rule: #E7EDF2;
+  --news: #F0766D; --sport: #5CC79B; --screen: #B29CF5; --death: #A9B6C2;
+  --viral: #F2A257; --evergreen: #6CC3E0; --mystery: #D9C84A;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--text); font-size: 1.0625rem; line-height: 1.55; }
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; text-underline-offset: .18em; text-decoration-thickness: 1px; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; border-radius: 2px; }
+h1, h2, h3 { font-family: var(--display); letter-spacing: -.015em; text-wrap: balance; margin: 0; }
+.wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 1rem; }
+@media (min-width: 720px) { .wrap { padding: 0 1.5rem; } }
+
+/* Category colour helper: style="--c: var(--news)" via .cat-news etc. */
+.cat-news { --c: var(--news); } .cat-sport { --c: var(--sport); } .cat-screen { --c: var(--screen); }
+.cat-death { --c: var(--death); } .cat-viral { --c: var(--viral); } .cat-evergreen { --c: var(--evergreen); } .cat-mystery { --c: var(--mystery); }
+
+.kicker { font-family: var(--display); font-size: .78rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--c, var(--soft)); text-decoration: none; }
+.meta { font-family: var(--display); font-size: .82rem; color: var(--soft); }
+.headline-link { text-decoration: none; }
+.headline-link:hover h2, .headline-link:hover h3 { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: .12em; }
+.dek { color: var(--soft); margin: .4rem 0 0; }
+.section-title { font-family: var(--display); font-size: .9rem; font-weight: 750; letter-spacing: .06em; text-transform: uppercase; border-top: 3px solid var(--rule); padding-top: .5rem; margin: 0 0 1rem; display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+.section-title a { font-size: .8rem; font-weight: 600; letter-spacing: 0; text-transform: none; color: var(--soft); }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }

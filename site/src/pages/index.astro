@@ -1,0 +1,18 @@
+---
+// Static hosting has no server-side Accept-Language, so pick the edition in the browser; /en/ is the no-JS default.
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Wiki Trends</title>
+  <link rel="alternate" hreflang="en" href="/en/" />
+  <link rel="alternate" hreflang="fr" href="/fr/" />
+  <script is:inline>
+    location.replace((navigator.languages || [navigator.language]).some((l) => /^fr\b/i.test(l)) ? "/fr/" : "/en/");
+  </script>
+  <meta http-equiv="refresh" content="1; url=/en/" />
+</head>
+<body><p><a href="/en/">English</a> · <a href="/fr/">Français</a></p></body>
+</html>

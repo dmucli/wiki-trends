@@ -1,0 +1,15 @@
+---
+import EditionPage from "../../../../../components/EditionPage.astro";
+import { editionDates, LANGS, type Lang } from "../../../../../lib/content.ts";
+
+export function getStaticPaths() {
+  return LANGS.flatMap((lang) =>
+    editionDates(lang).map((date) => {
+      const [y, m, d] = date.split("-");
+      return { params: { lang, y, m, d }, props: { date } };
+    }),
+  );
+}
+const lang = Astro.params.lang as Lang;
+---
+<EditionPage lang={lang} date={Astro.props.date} />
