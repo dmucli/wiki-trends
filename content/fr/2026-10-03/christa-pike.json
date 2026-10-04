@@ -1,0 +1,82 @@
+{
+  "lang": "fr",
+  "date": "2026-10-03",
+  "rank": 1,
+  "title": "Christa Pike",
+  "wikipediaUrl": "https://fr.wikipedia.org/wiki/Christa_Pike",
+  "slug": "christa-pike",
+  "views": 37702,
+  "series": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    56489,
+    42335,
+    37702
+  ],
+  "spike": 0.7,
+  "updatedAt": "2026-10-04T16:45:53.856Z",
+  "image": null,
+  "headline": "Christa Pike survit à son exécution au Tennessee, et le chef des prisons démissionne",
+  "dek": "Le 30 septembre, deux doses de pentobarbital n'ont pas tué la seule femme du couloir de la mort du Tennessee. Elle est inconsciente, sous respirateur, et la démission du responsable des prisons de l'État relance l'affaire.",
+  "whatItIs": "Christa Pike, 50 ans, est une détenue américaine. Elle a été condamnée à mort en 1996 pour le meurtre de Colleen Slemmer, commis en janvier 1995 à Knoxville, et elle est la seule femme dans le couloir de la mort du Tennessee.",
+  "whyNow": "Le mercredi 30 septembre 2026, le Tennessee a tenté de l'exécuter par injection létale. La procédure a été arrêtée près de deux heures après son début : Christa Pike était toujours en vie malgré deux doses de pentobarbital. Elle a été hospitalisée dans un état critique. Depuis, l'affaire reste à la une. Ses avocats ont accusé l'équipe chargée des perfusions de ne pas avoir vu que les cathéters étaient mal posés, puis le gouverneur Bill Lee a annoncé samedi la démission de Frank Strada, responsable de l'administration pénitentiaire.",
+  "body": [
+    "Christa Pike devait être la première femme exécutée au Tennessee depuis environ deux siècles. Ses avocats ont multiplié les recours jusqu'à la dernière minute. Le 30 septembre, trois juges de la cour d'appel fédérale du 6e circuit ont brièvement suspendu l'exécution. La Cour suprême des États-Unis l'a finalement autorisée. Le soir même, Christa Pike a été attachée sur la table d'exécution.",
+    "Elle a reçu deux doses de pentobarbital, le produit utilisé par le Tennessee, sans en mourir. Selon le Tennessee Lookout, l'exécution a été interrompue près de deux heures après le début du protocole. D'après ses avocats, elle est intubée, sous respirateur et inconsciente dans un hôpital de la région de Nashville. Vendredi, ils ont affirmé que les perfusions étaient mal placées ou que ses veines avaient éclaté, ce qui aurait empêché le produit d'agir comme prévu. L'équipe pénitentiaire ne s'en serait pas aperçue. L'État n'a pas détaillé publiquement sa propre version des faits.",
+    "Samedi 3 octobre, le gouverneur républicain Bill Lee a annoncé que Frank Strada, commissaire à l'administration pénitentiaire, quitterait ses fonctions dans le courant du mois. Selon le Death Penalty Information Center, c'est la deuxième exécution ratée dans l'État en cinq mois. Le Tennessee avait déjà suspendu toutes ses exécutions en 2022 parce que les produits létaux n'avaient pas été correctement testés. Un rapport avait ensuite montré que l'État ne respectait pas son propre protocole. La situation juridique et médicale de Christa Pike reste incertaine.",
+    "Les faits remontent au 12 janvier 1995. Christa Pike, alors âgée de 18 ans, suivait un programme de formation Job Corps à Knoxville. Avec un complice, elle a torturé et tué une autre stagiaire, Colleen Slemmer, par jalousie selon l'accusation. Elle a été condamnée à mort en mars 1996. Elle était alors la plus jeune femme condamnée à la peine capitale à l'époque moderne aux États-Unis. En 2001, elle a aussi été reconnue coupable de tentative de meurtre sur une codétenue.",
+    "Ses défenseurs disent qu'elle a été victime d'abus sexuels dès la petite enfance et qu'elle souffre d'un syndrome de stress post-traumatique. Selon eux, ces éléments n'ont pas été présentés à son procès. Ils contestaient aussi le protocole d'injection en raison de ses problèmes de santé. L'État n'a pas nié ces abus, mais il a soutenu en justice que l'exécution pouvait avoir lieu. Le pic d'intérêt a commencé le 1er octobre, au lendemain de l'exécution manquée, et est resté très élevé jusqu'au 3 octobre."
+  ],
+  "category": "news",
+  "confidence": "confirmed",
+  "sensitive": true,
+  "sources": [
+    {
+      "title": "Christa Pike execution attempt: What happened?",
+      "url": "https://www.cnn.com/2026/10/01/us/christa-pike-execution-tennessee",
+      "publisher": "CNN"
+    },
+    {
+      "title": "Tennessee prison system head to resign after failed Christa Pike execution",
+      "url": "https://www.cbsnews.com/news/christa-pike-failed-execution-tennessee-official-resigns/",
+      "publisher": "CBS News"
+    },
+    {
+      "title": "Tennessee death row inmate Christa Pike receiving medical care after failed execution",
+      "url": "https://tennesseelookout.com/2026/09/30/us-supreme-court-allows-execution-of-tennessee-woman-on-death-row-to-proceed/",
+      "publisher": "Tennessee Lookout"
+    },
+    {
+      "title": "Christa Pike execution fails: What next when a lethal injection is botched?",
+      "url": "https://www.aljazeera.com/news/2026/10/1/christa-pike-execution-fails-what-next-when-a-lethal-injection-is-botched",
+      "publisher": "Al Jazeera"
+    }
+  ],
+  "generatedBy": "claude",
+  "model": "claude-opus-5-5"
+}

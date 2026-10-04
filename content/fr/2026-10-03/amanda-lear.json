@@ -1,0 +1,86 @@
+{
+  "lang": "fr",
+  "date": "2026-10-03",
+  "rank": 2,
+  "title": "Amanda Lear",
+  "wikipediaUrl": "https://fr.wikipedia.org/wiki/Amanda_Lear",
+  "slug": "amanda-lear",
+  "views": 25283,
+  "series": [
+    452,
+    489,
+    710,
+    575,
+    419,
+    397,
+    477,
+    464,
+    471,
+    533,
+    343,
+    536,
+    1259,
+    526,
+    442,
+    499,
+    1683,
+    8387,
+    3921,
+    1444,
+    975,
+    1064,
+    3089,
+    1479,
+    651,
+    507,
+    498,
+    577,
+    1063,
+    25283
+  ],
+  "spike": 47.2,
+  "updatedAt": "2026-10-04T16:45:54.047Z",
+  "image": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e6/Amanda_Lear_2010_a.jpg/1280px-Amanda_Lear_2010_a.jpg?utm_source=fr.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "width": 1200,
+    "height": 1527,
+    "file": "Fichier:Amanda Lear 2010 a.jpg",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Amanda_Lear_2010_a.jpg",
+    "artist": "Siren-Com",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+  },
+  "headline": "Amanda Lear s’est confiée sur ses opérations des yeux dans « 50' Inside » sur TF1",
+  "dek": "Le samedi 3 octobre 2026, l’artiste a répondu aux questions d’Isabelle Ithurburu dans le magazine de TF1. Elle y a expliqué pourquoi on la voit désormais souvent avec des lunettes noires.",
+  "whatItIs": "Amanda Lear est une chanteuse, actrice, animatrice de télévision et peintre française, connue pour ses tubes disco de la fin des années 1970 et pour avoir été la muse de Salvador Dalí.",
+  "whyNow": "Le samedi 3 octobre 2026, Amanda Lear était l’invitée de « 50' Inside », le magazine de TF1 présenté par Isabelle Ithurburu. Elle y a parlé de sa santé et expliqué qu’elle avait été opérée des yeux. C’est pour cette raison qu’elle porte maintenant souvent des lunettes sombres. Les médias people ont relayé ses propos le jour même, ce qui correspond au pic de lectures. Aucune source ne fait toutefois le lien direct entre l’émission et la hausse du trafic.",
+  "body": [
+    "Dans « 50' Inside », Amanda Lear a déclaré : « L'année dernière, on m'a opérée des yeux ». Elle a ainsi expliqué pourquoi elle apparaît de plus en plus souvent en public avec des lunettes noires. L’entretien a été diffusé sur TF1 le samedi 3 octobre 2026, une case horaire très suivie.",
+    "Ces problèmes de santé avaient déjà été évoqués. Au début de l’année 2026, l’artiste avait raconté avoir subi plusieurs interventions à la suite d’un problème ophtalmologique. Elle avait alors rassuré ses fans en disant espérer que ce serait la dernière.",
+    "En janvier 2022, alors qu’elle jouait au théâtre, elle avait aussi annoncé sur Instagram avoir été hospitalisée et opérée du cœur. Elle avait ensuite repris ses activités.",
+    "Amanda Lear est née à Saïgon. Wikipédia indique 1939, mais sa date de naissance varie selon les sources. Elle a d’abord été mannequin dans les années 1960, puis s’est fait connaître grâce à sa relation avec Salvador Dalí. Elle a ensuite fait carrière dans la musique avec des titres comme « Follow Me » ou « Queen of Chinatown ». Elle a aussi animé des émissions de télévision, surtout en Italie, joué au théâtre et peint.",
+    "Elle avait déjà suscité de l’intérêt ces dernières semaines, avec plusieurs petits pics de lectures. Le samedi 3 octobre, l’article a atteint environ 25 000 vues, soit près de cinquante fois son niveau habituel."
+  ],
+  "category": "screen",
+  "confidence": "likely",
+  "sensitive": false,
+  "sources": [
+    {
+      "title": "\"L'année dernière, on m'a opérée des yeux\" : Amanda Lear révèle pourquoi elle doit désormais porter souvent des lunettes sombres",
+      "url": "https://www.titrespresse.com/23779922603/amanda-lear-inside",
+      "publisher": "Titrespresse"
+    },
+    {
+      "title": "“J’espère que ce sera la dernière”, Amanda Lear rassure après une nouvelle prise en charge",
+      "url": "https://www.purepeople.com/article/jespere-que-ce-sera-la-derniere-amanda-lear-rassure-apres-une-nouvelle-prise-en-charge_a546608/1",
+      "publisher": "Purepeople"
+    },
+    {
+      "title": "Amanda Lear : hospitalisée, elle annonce à ses fans avoir été opérée du cœur",
+      "url": "https://www.cnews.fr/people/2022-01-10/amanda-lear-hospitalisee-elle-annonce-ses-fans-avoir-ete-operee-du-coeur-1169256",
+      "publisher": "CNews"
+    }
+  ],
+  "generatedBy": "claude",
+  "model": "claude-opus-5-5"
+}

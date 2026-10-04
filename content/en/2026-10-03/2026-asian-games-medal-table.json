@@ -1,0 +1,83 @@
+{
+  "lang": "en",
+  "date": "2026-10-03",
+  "rank": 1,
+  "title": "2026 Asian Games medal table",
+  "wikipediaUrl": "https://en.wikipedia.org/wiki/2026_Asian_Games_medal_table",
+  "slug": "2026-asian-games-medal-table",
+  "views": 898640,
+  "series": [
+    6,
+    6,
+    2,
+    1,
+    4,
+    5,
+    14,
+    14,
+    10,
+    15,
+    8,
+    24,
+    15,
+    45,
+    1074,
+    340,
+    25561,
+    54520,
+    121924,
+    117681,
+    152884,
+    142386,
+    259696,
+    227528,
+    221798,
+    293009,
+    363735,
+    291675,
+    558673,
+    898640
+  ],
+  "spike": 2643.1,
+  "updatedAt": "2026-10-04T16:45:11.177Z",
+  "image": null,
+  "headline": "Asian Games medal table peaks as India finish with 85 medals on the penultimate day",
+  "dek": "On 3 October, the second-to-last day of Aichi–Nagoya 2026, India won cricket and hockey gold, and Japan won water polo and softball titles. China's lead at the top was never in doubt.",
+  "whatItIs": "The article is the running tally of gold, silver and bronze medals won by each country at the 2026 Asian Games, which are being held in Aichi Prefecture and Nagoya, Japan, from 19 September to 4 October.",
+  "whyNow": "This is a follow-up to our 30 September story, and the reason is the same: people are checking the medal standings as the Games end. What changed is how busy the day was. 3 October, Day 14, was the last full day of finals, with deciding matches in cricket, hockey, wrestling, golf, water polo and softball. India's final medal count was settled that day, and with 88% of readers on mobile, much of the traffic probably came from fans checking the table on their phones.",
+  "body": [
+    "Traffic to the medal table rose to almost 900,000 views on 3 October. That was its busiest day so far and the most-read article on English Wikipedia that day, up from about 560,000 the day before.",
+    "Much of that day's news came from India. According to ESPN and Olympics.com, India beat Pakistan in the men's cricket final, kept its men's hockey title, and won gold through Aman in wrestling. That brought India to 21 gold, 27 silver and 37 bronze, 85 medals in total, and fourth place on the table. That is short of the 107 medals India won in Hangzhou in 2023, but it still left the country in the top four.",
+    "Japan, the host, also had a good day. According to Khel Now, Japan's men beat Kazakhstan 24-7 in the water polo final, and its women's softball team beat China for the title.",
+    "At the top, nothing changed. China had already passed 100 gold medals by the middle of the Games, prompting Yahoo Sports to suggest the event could be called the \"China Games\". It finished the day far ahead of Japan and South Korea. Wikipedia editors were updating the table all day, adding results such as Saudi Arabia's gold and silver and Qatar's bronze in equestrian.",
+    "The Games close on 4 October with only a few events left, so the final table will look almost the same as it did on Saturday night. Interest should stay high for one more day and then fall off quickly."
+  ],
+  "category": "sport",
+  "confidence": "likely",
+  "sensitive": false,
+  "sources": [
+    {
+      "title": "India at Asian Games: Highlights from Day 14 as India finish with 85 medals",
+      "url": "https://www.espn.com/espn/story/_/id/50085253/india-asian-games-live-updates-scores-news-results-commentary-schedule-timings-october-3-2026-aichi-nagoya",
+      "publisher": "ESPN"
+    },
+    {
+      "title": "India at Asian Games 2026, Day 14: Five golds in as many sports and two Olympic quotas - as it happened",
+      "url": "https://www.olympics.com/en/news/asian-games-2026-live-scores-updates-results-india-october-3",
+      "publisher": "Olympics.com"
+    },
+    {
+      "title": "Asian Games 2026: Updated medal tally after Day 14, October 3",
+      "url": "https://khelnow.com/asian-games/medal-tally-october-3-asian-games-202610",
+      "publisher": "Khel Now"
+    },
+    {
+      "title": "The Asian Games should be called the 'China Games' as its domination continues",
+      "url": "https://sports.yahoo.com/articles/asian-games-called-china-games-061928683.html",
+      "publisher": "Yahoo Sports"
+    }
+  ],
+  "generatedBy": "claude",
+  "model": "claude-opus-5-5",
+  "continuedFrom": "2026-09-30/2026-asian-games-medal-table"
+}

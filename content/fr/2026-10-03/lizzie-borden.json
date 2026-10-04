@@ -1,0 +1,90 @@
+{
+  "lang": "fr",
+  "date": "2026-10-03",
+  "rank": 3,
+  "title": "Lizzie Borden",
+  "wikipediaUrl": "https://fr.wikipedia.org/wiki/Lizzie_Borden",
+  "slug": "lizzie-borden",
+  "views": 23509,
+  "series": [
+    2216,
+    2520,
+    2437,
+    4587,
+    4519,
+    2905,
+    2496,
+    3262,
+    3793,
+    3728,
+    7692,
+    6147,
+    11633,
+    100778,
+    123292,
+    126953,
+    155697,
+    109204,
+    89910,
+    72230,
+    58614,
+    47271,
+    50232,
+    59930,
+    39249,
+    32354,
+    29907,
+    25773,
+    21507,
+    23509
+  ],
+  "spike": 0.9,
+  "updatedAt": "2026-10-04T16:45:53.934Z",
+  "image": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/7/71/Lizzie_Borden_1890.jpg?utm_source=fr.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+    "width": 1200,
+    "height": 1403,
+    "file": "Fichier:Lizzie Borden 1890.jpg",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Lizzie_Borden_1890.jpg",
+    "artist": "Auteur inconnu",
+    "license": "Public domain"
+  },
+  "headline": "Lizzie Borden reste dans le top grâce au succès durable de « Monstre » sur Netflix",
+  "dek": "Deux semaines après sa sortie, la quatrième saison de l'anthologie criminelle de Netflix est toujours numéro un. Le public continue d'aller vérifier l'histoire vraie de l'affaire de Fall River.",
+  "whatItIs": "Lizzie Borden (1860-1927) est une Américaine accusée d'avoir tué à la hache son père et sa belle-mère le 4 août 1892 à Fall River, dans le Massachusetts. Elle a été acquittée en 1893.",
+  "whyNow": "La raison n'a pas changé : la série « Monstre : L'Histoire de Lizzie Borden », disponible sur Netflix depuis le 17 septembre 2026, continue d'amener des lecteurs vers l'article. Ce qui est nouveau, c'est que la série gagne encore du public : d'après TheWrap, elle a cumulé 14,5 millions de vues lors de sa deuxième semaine, soit 20 % de plus que la première, et reste en tête du classement des séries de Netflix. Le pic de curiosité est passé, mais l'intérêt reste élevé.",
+  "body": [
+    "Depuis notre article du 30 septembre, rien de neuf du côté de l'affaire elle-même. C'est toujours la quatrième saison de « Monstre », l'anthologie de Ryan Murphy et Ian Brennan, qui pousse les spectateurs à aller lire l'histoire réelle. Après Dahmer, les frères Menendez et Ed Gein, c'est la première saison consacrée à une femme.",
+    "Les chiffres d'audience expliquent pourquoi l'intérêt dure. La série a démarré à 12,1 millions de vues sur ses quatre premiers jours, selon Variety, puis a encore progressé la semaine suivante. Elle reste en tête du classement de Netflix, même si What's on Netflix note qu'elle fait un peu moins bien que les saisons précédentes, sachant que les jours de sortie n'étaient pas les mêmes.",
+    "Le phénomène suit une courbe classique pour une série à succès. La consultation de l'article a culminé quelques jours après la sortie, puis a baissé peu à peu. Elle reste pourtant environ dix fois au-dessus de son niveau habituel, à mesure que de nouveaux spectateurs terminent les épisodes.",
+    "Les critiques sont mitigées. La presse spécialisée, dont Écran Large et AlloCiné, s'interroge sur les libertés prises avec les faits et sur l'éthique de ces fictions inspirées de vrais crimes. C'est justement ce qui pousse beaucoup de spectateurs à aller vérifier l'histoire réelle : un double meurtre jamais résolu, une accusée acquittée par un jury en 1893, puis restée à Fall River jusqu'à sa mort en 1927, rejetée par une partie de la ville."
+  ],
+  "category": "screen",
+  "confidence": "likely",
+  "sensitive": true,
+  "sources": [
+    {
+      "title": "Lizzie Borden's 'Monster' Jumps 20% From Premiere Week With 14.5 Million Views on Netflix, Tops TV Chart",
+      "url": "https://www.thewrap.com/creative-content/tv-shows/monster-the-lizzie-borden-story-ratings-viewership-week-2-netflix/",
+      "publisher": "TheWrap"
+    },
+    {
+      "title": "'Monster: The Lizzie Borden Story' Ratings: 12.1 Million Netflix Views",
+      "url": "https://variety.com/2026/tv/news/monster-the-lizzie-borden-story-ratings-netflix-views-1236872484/",
+      "publisher": "Variety"
+    },
+    {
+      "title": "Netflix Top 10s: 'Monster: Lizzie Borden' Holds Top Spot But Trails Prior Seasons",
+      "url": "https://www.whats-on-netflix.com/news/top-10-reports/netflix-top-10s-monster-lizzie-borden-holds-top-spot-with-a-caveat-as-unabomber-movie-posts-middling-debut/",
+      "publisher": "What's on Netflix"
+    },
+    {
+      "title": "Monstre saison 4 : critique de l'histoire de Lizzie Borden sur Netflix",
+      "url": "https://www.ecranlarge.com/saisons/critique/monstre-saison-4-histoire-de-lizzie-borden-critique",
+      "publisher": "Écran Large"
+    }
+  ],
+  "generatedBy": "claude",
+  "model": "claude-opus-5-5",
+  "continuedFrom": "2026-09-30/lizzie-borden"
+}
