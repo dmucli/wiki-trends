@@ -1,9 +1,7 @@
 name: Daily edition
 
 on:
-  schedule:
-    - cron: "30 2 * * *" # pageviews for the previous day are usually out by now
-    - cron: "0 5 * * *"  # retry; skipped if today's edition already exists
+  # Scheduled runs are turned off. Run the workflow by hand from the Actions tab when you want an edition.
   workflow_dispatch:
     inputs:
       date:
